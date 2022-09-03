@@ -1,7 +1,6 @@
 /*
   The common styles
 */
-
 html {
   @media (prefers-color-scheme: light) {
     &:not([data-mode]),
@@ -804,7 +803,6 @@ $sidebar-display: "sidebar-display";
 
   .sidebar-bottom {
     margin-bottom: 2.1rem;
-
     @include ml-mr(auto);
     @include pl-pr(1rem);
 

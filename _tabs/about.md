@@ -43,7 +43,8 @@ order: 6
 
 
 ## 联系我
-- 微信公众号：猿java，“爱技术，爱生活” 欢迎关注
 - Email：yuanjava@qq.com
-- 个人微信：MrWeiki（备注：博客）
+- 个人微信：MrWeiki
+- 微信公众号：猿java
 
+![img.png](https://www.yuanjava.cn/assets/img/pub.png)
