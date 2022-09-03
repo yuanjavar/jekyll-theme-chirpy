@@ -5,7 +5,7 @@ source "https://rubygems.org"
 gemspec
 
 group :test do
-  gem "html-proofer", "~> 4.4"
+  gem "html-proofer", "~> 3.1"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -29,3 +29,4 @@ gem 'typhoeus', '~> 1.4'
 gem 'yell', '~> 2.2', '>= 2.2.2'
 gem 'zeitwerk', '~> 2.6'
 gem 'ethon', '~> 0.15.0'
+gem 'etc', '~> 1.1'
