@@ -2,9 +2,11 @@
 layout: post
 title: ThreadLocal如何保证线程安全？
 category: java
-tags: [java]
+tags: [java,面试]
+description: ThreadLocal如何保证线程安全？
+keywords: ThreadLocal, 线程安全
 excerpt: ThreadLocal如何保证线程安全
---- 
+---
 你好，我是Weiki，欢迎来到猿java。
 
 身为java程序员，当你想跳槽加薪(特别是高阶岗位)，ThreadLocal似乎成为了一个不可回避的知识点，除了面试，如果你扒过框架源码，也会在很多场景看到ThreadLocal的身影，ThreadLocal是大牛Doug Lead的杰作，一个从jdk 1.2 版本就存在的宝藏，今天就让我们一起来揭开它那神秘的面纱！
@@ -15,7 +17,7 @@ excerpt: ThreadLocal如何保证线程安全
 
 ThreadLocal，字面意思：线程本地。位于 jdk 的java.lang包中，支持泛型，下面就是官方源码对 ThreadLocal 的描述：
 
-```java 
+```java
 /**
 * This class provides thread-local variables.  These variables differ from
 * their normal counterparts in that each thread that accesses one (via its
@@ -55,8 +57,8 @@ ThreadLocal，字面意思：线程本地。位于 jdk 的java.lang包中，支�
 定义看起来台晦涩，我们写个样例感受到ThreadLocal的使用，代码中维护一个全局的ThreadLocal<Object> local变量，然后分别创建3个线程，每个线程内部创建一个局部的Objec对象，然后分别调用ThreadLocal的set(object)和get()，代码如下：
 ```java
 public class ThreadLocalTest {
-    public static void main(String[] args) { 
-    // 创建一个ThreadLocal 实例        
+    public static void main(String[] args) {
+    // 创建一个ThreadLocal 实例
     ThreadLocal<Object> local = new ThreadLocal<>();
 
        // 线程1
@@ -98,7 +100,7 @@ ThreadName:Thread-2,getResult:java.lang.Object@1232cc0,hashCode:1493325006
 ## 2、源码分析
 接下来就一起分析ThreadLocal的源码(源码的原文注释会适当的删减)，此过程有些枯燥，烦请大家耐心往下看：
 
-```java  
+```java
 public void set(T value) {
 // 获取当前线程
 Thread t = Thread.currentThread();
@@ -188,7 +190,7 @@ createMap()底层维护的是一个Entry[]，来存放ThreadLocal和value；
 
 ThreadLocal.get()方法
 
-```java 
+```java
 public T get() {
 Thread t = Thread.currentThread();
 ThreadLocalMap map = getMap(t);
@@ -231,7 +233,7 @@ Doug Lea 花这么大的代码去设计一个ThreadLocal类主要是为了解决
 
 ThreadLocal在spring事务中的使用
 
-```java 
+```java
 org.springframework.transaction.support.TransactionSynchronizationManager(spring-5.0.7-RELEASE)
 public abstract class TransactionSynchronizationManager {
 private static final ThreadLocal<Map<Object, Object>> resources =
@@ -301,13 +303,13 @@ ThreadLocal 本身不存储值，它只是作为Entry中的一个key，让Thread
 
 其实set()，get()，remove()方法最终都是调用expungStakeEntry()方法，源码如下，我在9个核心步骤上加了注释。
 
-```java 
+```java
 // 1.staleSlot 需要被删除对象在Entry[]中的位置
 private int expungeStaleEntry(int staleSlot) {
 Entry[] tab = table;
 int len = tab.length;
 
-            // expunge entry at staleSlot 
+            // expunge entry at staleSlot
             // 2.删除位置的值，因为key已经为null，所以只需要将value置为null，删除
             tab[staleSlot].value = null;
             // 3.将entry对象赋值为null
@@ -338,7 +340,7 @@ int len = tab.length;
                         // Unlike Knuth 6.4 Algorithm R, we must scan until
                         // null because multiple entries could have been stale.
                         // 9.从当前的位置h往后找，找到null的位置将e填入
-                        while (tab[h] != null) 
+                        while (tab[h] != null)
                             h = nextIndex(h, len);
                         tab[h] = e;
                     }
@@ -346,7 +348,7 @@ int len = tab.length;
             }
             return i;
         }
-```        
+```
 解决内存泄露的代码实例
 
 ```java
@@ -370,7 +372,7 @@ public static void resolveMemoryLeaks(){
 
 测试用例代码：
 
-```java 
+```java
 public class InheritableThreadLocalTest {
 
     public static ThreadLocal<String> tl = new ThreadLocal();
@@ -416,7 +418,7 @@ itl子线程获取的msg：hello world
 通过运行结果可以看到ThreadLocal无法在子线程中传递父线程的变量msg，InheritableThreadLocal可以做到。
 查看源码可以看到：InheritableThreadLocal继承了ThreadLocal，因此InheritableThreadLocal中维护了下面两个变量，这两个变量都是Thread私有的，因此可以查看java.lang.Thread源码：
 
-```java 
+```java
 ThreadLocal.ThreadLocalMap threadLocals = null;
 ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
 
@@ -440,28 +442,28 @@ InheritableThreadLocal使用个人建议
 
 ## 7、面试改如何回答ThreadLocal呢？
 到此，我们就把ThreadLocal分析完毕，感谢你耐心的看下来，接下来就是放大招的时候：面试中改如何回答ThreadLocal的问题呢？
-> 面试官：你能讲讲你对ThreadLocal的理解吗？ 
-> 
+> 面试官：你能讲讲你对ThreadLocal的理解吗？
+>
 > 候选人：
-> 
+>
 > 首先：可以讲讲数据结构，内部封装的ThreadLocalMap，Entry，弱引用；
-> 
+>
 > 初级岗位候选人必须会，代表看过源码。初级岗位候选人以上必须会。
 
 > 其次：讲讲ThreadLocalMap解决什么问题；
-> 
+>
 > 初级岗位候选人面试的加分题，初级以上必须会。
 
 > 接着：可以讲讲ThreadLoca内存泄露的问题以及解决方法
-> 
+>
 > 初级岗位候选人面试的加分题，初级以上必须会。
 
 > 接着：可以讲讲ThreadLocal在一些框架中的使用或者你工作中的使用
-> 
+>
 > 高级岗位候选人加分题，高级岗位候选人以上必须会。
 
 > 最后：可以讲讲ThreadLocal父子线程传值以及个人的理解
-> 
+>
 > 高级岗位候选人加分题，高级岗位候选人以上必须会。
 
 ## 最后

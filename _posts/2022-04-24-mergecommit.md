@@ -3,8 +3,10 @@ layout: post
 title: 如何在idea中将git多个commit合并成一个
 category: java
 tags: [java]
+description: 如何在idea中将git多个commit合并成一个
+keywords: git rebase, git merge,git commit
 excerpt: 在使用Git做版本控制开发代码时，难免会出现多个commit，有些commit看起来不那么和谐，那么如何"隐藏"呢？
---- 
+---
 
 
 你好，我是Weiki，欢迎来到猿java。

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何设计一个秒杀系统？
-category: 面试
+category: interview
 tags: [面试]
 excerpt: 说起秒杀，我想大家肯定不陌生，x里的双十一，x东的618，12306抢火车票，直播带货等等场景，“秒杀”的场景处处可见，那么，你知道如何来设计一个秒杀系统吗？
 ---

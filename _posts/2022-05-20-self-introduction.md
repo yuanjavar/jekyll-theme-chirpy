@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何在java面试中给出一个出彩的自我介绍
-category: 面试
+category: interview
 tags: [面试]
 excerpt: 自我介绍是java面试中一个必不可少的环节，一个出彩的自我介绍，可以给面试官留下好的印象，帮助你拿下心仪的offer，那么我们该怎么去做自我介绍呢？
 ---

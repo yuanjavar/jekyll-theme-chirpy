@@ -3,8 +3,10 @@ layout: post
 title: DynamoDB系列之--如何做in查询
 category: DynamoDB
 tags: [DynamoDB]
+description: DynamoDB in 查询
+keywords: DynamoDB
 excerpt: DynamoDB是亚马逊内部一款功能强大的NoSql数据库，那么DynamoDB怎么实现和mysql一样的in查询呢？
---- 
+---
 
 你好，我是Weiki，欢迎来到猿java。
 
@@ -29,7 +31,7 @@ public class TestClass {
         queryExpression.setConsistentRead(false);
         String condFilter = "";
         HashMap<String, AttributeValue> attrs = new HashMap<>();
-        // 拼装in 的sql语句 
+        // 拼装in 的sql语句
         if (!userList.isEmpty()) {
             condFilter += " #UserId in (" +
                     IntStream.range(0, userList.size()).mapToObj(i -> ":userId" + i).collect(Collectors.joining(","))

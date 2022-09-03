@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 农村给牛吃的，居然是一种中药，夏季当蔬菜，好处多多
-category: 生活
-tags: [生活]
+category: common
+tags: [common]
 excerpt: 美食 马齿苋
 ---
 你好，我是Weiki，欢迎来到猿java。

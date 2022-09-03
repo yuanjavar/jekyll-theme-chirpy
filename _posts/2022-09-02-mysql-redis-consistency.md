@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何保持 mysql 和 redis 的数据一致性？
-category: 面试
+category: arch
 tags: [面试]
 description: 如何保持 mysql 和 redis 的数据一致性？
 keywords: 数据一致性, 强一致性, 最终一致性, mysql, redis, mysql和redis数据一致性

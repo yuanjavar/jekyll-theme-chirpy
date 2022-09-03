@@ -3,6 +3,8 @@ layout: post
 title: Java中的判断相等问题，你踩过几个坑？
 category: java
 tags: [java]
+description: Java中的判断相等问题，你踩过几个坑？？
+keywords: java 判等, equals
 excerpt: Java中的判断相等问题，你踩过几个坑？
 ---
 
@@ -13,7 +15,7 @@ excerpt: Java中的判断相等问题，你踩过几个坑？
 
 ## 判等操作
 
-在java中常见的的判等操作有：equal、compareTo 和 ==。 
+在java中常见的的判等操作有：equal、compareTo 和 ==。
 
 > 温馨提示：单个 = 在java中是赋值的含义，不是数学中的等于号哦
 
@@ -69,7 +71,7 @@ Integer integer2 = new Integer(1);
 Integer integer3 = new Integer(200);
 Integer integer4 = new Integer(200);
 integer1 == integer2; // true
-integer3 == integer4; // false       
+integer3 == integer4; // false
 integer1.equals(integer2); //false
 
 String a = new String("1");
@@ -86,7 +88,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     public static Integer valueOf(int i) {
         if (i >= IntegerCache.low && i <= IntegerCache.high)
             return IntegerCache.cache[i + (-IntegerCache.low)];
-        // 使用了对象 
+        // 使用了对象
         return new Integer(i);
     }
 }
@@ -133,7 +135,7 @@ a == b; //true
 
 // 案例2
 String a = "1";
-String b = new String("1"); 
+String b = new String("1");
 a == b; // false
 
 // 案例3
@@ -256,7 +258,7 @@ public interface Comparable<T> {
 ## 踩坑点
 1. 对于包装数据类型使用==比值，结果有时候对，有时候错
 2. 对于String类型，使用了new String("").intern(),导致性能问题
-3. 
+3.
 
 
 ## 最后

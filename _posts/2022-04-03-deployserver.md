@@ -3,6 +3,8 @@ layout: post
 title: 如何把技术博客部署到自己的服务器
 category: common
 tags: [common]
+description: 如何把技术博客部署到自己的服务器
+keywords: 技术网站,个人博客
 excerpt: 有了技术博客，如何才能被百度收录，希望被更多的技术人看到呢？
 ---
 
@@ -151,7 +153,7 @@ git pull origin master
 jekyll build --destination=/usr/share/nginx/html
 ```
 
-也可以把上面的几个步骤写了一个 deploy.sh 脚本中，后面只需要执行shell脚本了  sh deploy.sh 
+也可以把上面的几个步骤写了一个 deploy.sh 脚本中，后面只需要执行shell脚本了  sh deploy.sh
 
 ## 域名解析
 
@@ -172,12 +174,12 @@ jekyll build --destination=/usr/share/nginx/html
 
 一般linux安装有多种方式，比较常见有：云安装和源码安装
 
-**1.云安装**  
+**1.云安装**
 
 该方式是云端拉取资源安装，比较省事，一般都是安装该系统支持的最新包
 ```shell
 yum install 软件名称  // 针对linux系统
-yum install 软件名称 -v '版本号' //指定版本安装 
+yum install 软件名称 -v '版本号' //指定版本安装
 apt-get install 软件名称  // 针对ubuntu系统
 ```
 

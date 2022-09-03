@@ -3,8 +3,9 @@ layout: post
 title: 用了这么多年Redis，你知道Redis名字的由来吗？
 category: redis
 tags: [redis]
-excerpt: Redis作为内存数据库的天花板，你知道它名字的由来吗？
---- 
+description: redis官网升级了
+keywords: redis升级
+---
 你好，我是Weiki，欢迎来到猿java。
 
 ## 背景
@@ -14,13 +15,13 @@ excerpt: Redis作为内存数据库的天花板，你知道它名字的由来吗
 Redis的作者是antirez，[antirez个人官网](http://antirez.com/)，
 在Redis的官方文档中有一段关于 [redis名字由来的解释](https://redis.io/docs/getting-started/faq/#redis-is-single-threaded-how-can-i-exploit-multiple-cpu--cores)
 > Where does the name "Redis" come from?
-> 
+>
 > Redis is an acronym that stands for REmote DIctionary Server.
 
 REmote DIctionary Server：远程字典服务器，Redis就是这3个单词的组合
 
 > Redis源码是C语言实现的，而字典又是C语言中一种经典的数据结构，字典的含义如下：
-> 
+>
 > 字典：是由一些具有相同可辨认特性的数据元素（或记录）构成的集合
 
 字典，这是不是和java.util.Collection 集合有异曲同工之妙呢？
