@@ -47,4 +47,4 @@ order: 6
 - 个人微信：MrWeiki
 - 微信公众号：猿java
 
-![img.png](https://www.yuanjava.cn/assets/img/pub.png)
+![img.png](https://www.yuanjava.cn/assets/img/pub.jpg)
