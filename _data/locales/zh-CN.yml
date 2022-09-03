@@ -10,15 +10,16 @@ layout:
 # The tabs of sidebar
 tabs:
   # format: <filename_without_extension>: <value>
-  home: 首页
+  home: 主页
   categories: 分类
   tags: 标签
   archives: 归档
+  link: 友链
   about: 关于
 
 # the text displayed in the search bar & search results
 search:
-  hint: 搜索
+  hint: 全站搜索
   cancel: 取消
   no_results: 搜索结果为空
 
@@ -35,14 +36,14 @@ copyright:
     link: https://creativecommons.org/licenses/by/4.0/
 
   # Displayed in the footer
-  brief: 保留部分权利。
+  brief: 猿java版权所有。
   verbose: >-
-    除非另有说明，本网站上的博客文章均由作者按照知识共享署名 4.0 国际 (CC BY 4.0) 许可协议进行授权。
+    除非另有说明，本网站上的博客文章均由作者Weiki版权所有，转载请标明原作出处。
 
-meta: 本站由 :PLATFORM 生成，采用 :THEME 主题。
+meta:
 
 not_found:
-  statment: 抱歉，我们放错了该 URL，或者它指向了不存在的内容。
+  statment: 抱歉，您访问的URL还在建设中，先看看其他的精彩内容吧。
 
 notification:
   update_found: 发现新版本的内容。

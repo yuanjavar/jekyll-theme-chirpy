@@ -21,18 +21,18 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: 猿java                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: 爱技术，爱生活   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  专注于互联网领域分享.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ''
 
 github:
-  username: github_username             # change to your github username
+  username: yuanjavar             # change to your github username
 
 twitter:
   username: twitter_username            # change to your twitter username
@@ -40,12 +40,13 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
+  name: Weiki
+  icp: 浙ICP备19032951号
   email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://beian.miit.gov.cn/      # change to your twitter homepage
+    - https://github.com/yuanjavar       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -80,10 +81,10 @@ theme_mode:   # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'https://raw.githubusercontent.com/cotes2020/chirpy-images/main'
+img_cdn: 'https://www.yuanjava.cn'
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/commons/avatar.jpg'
+avatar: '/favicon.ico'
 
 # boolean type, the global switch for ToC in posts.
 toc: true

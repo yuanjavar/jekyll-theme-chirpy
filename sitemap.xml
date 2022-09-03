@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+<url>
+ <loc>https://www.yuanjava.cn</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/link.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/about.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/download.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/mysqlindex.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/redisweb.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/merge.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/gitrebase.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/mergecommit.html</loc>
+ <priority>0.5</priority>>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/functioninterface.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/slot.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/web3.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/nlopt.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/redisweb.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/redisname.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+<url>
+ <loc>https://www.yuanjava.cn/life.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/it.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/arch.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/payment.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+<url>
+ <loc>https://www.yuanjava.cn/posts/redis6.html</loc>
+ <priority>0.5</priority>
+ <changefreq>daily</changefreq>
+</url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/dai.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/machixian.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/spike-system.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+<url>
+  <loc>https://www.yuanjava.cn/posts/dynamodb-key-concepts.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/what-is-dynamodb.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+<url>
+  <loc>https://www.yuanjava.cn/posts/personal-technical-influence.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/tdd.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+<url>
+  <loc>https://www.yuanjava.cn/posts/cv.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/java-stream-and-for.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/dynamodb-local-secondary-index.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/dynamodb-global-secondary-index.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid-srp.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid-ocp.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid-lsp.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid-isp.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid-dip.html</loc>
+  <priority>0.5</priority>
+  <lastmod>2022-08-30</lastmod>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/solid.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/http.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/seo.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/why-spring-autowired-warn.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+ <url>
+  <loc>https://www.yuanjava.cn/posts/spring-value-null.html</loc>
+  <priority>0.5</priority>
+  <changefreq>daily</changefreq>
+ </url>
+</urlset>
