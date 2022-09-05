@@ -11,7 +11,7 @@ keywords: redis升级
 ## 背景
  Redis作为知内存数据库的天花板，在很多复杂的高并发，高性能项目中都可以看到，用了这么多年，一直很好奇Redis到底是什么意思，今天总有找到了
 
-## Redis名字由来m
+## Redis名字由来
 Redis的作者是antirez，[antirez个人官网](http://antirez.com/)，
 在Redis的官方文档中有一段关于 [redis名字由来的解释](https://redis.io/docs/getting-started/faq/#redis-is-single-threaded-how-can-i-exploit-multiple-cpu--cores)
 > Where does the name "Redis" come from?
