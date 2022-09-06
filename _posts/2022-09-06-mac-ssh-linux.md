@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何在mac自带的终端通用ssh秘钥连接多个远程Linux服务
+title: 如何用mac自带终端连接多个远程Linux服务器
 category: common
 tags: [common]
 description: 如何在mac自带的终端通用ssh秘钥连接多个远程Linux服务
