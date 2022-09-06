@@ -11,9 +11,11 @@ keywords: mac ssh秘钥生成,mac连接多个linux
 
 现如今，Mac电脑已经成了很多公司开发人员的标配，作为开发人员进行线上Linux服务器查错是在所难免的，很多公司有堡垒机(跳板机)，可以帮助开发人员
 快速管理和进入线上机器，但是相对运维比较落后的公司，要么安装一些三方工具，要么电脑上不停的切换服务器IP进行远程连接操作。今天，小编就分享如何利用mac自带
-终端，通用ssh秘钥连接多个远程Linux服务。
+终端连接多个远程Linux服务。
 
-## 设置mac本地ssh秘钥
+## 使用ssh秘钥连接
+
+### 设置mac本地ssh秘钥
 
 ```shell
 cd ~
@@ -67,7 +69,7 @@ drwxr-x---+ 55 weiki  staff  1760  9  6 09:48 ../
 -rw-------   1 weiki  staff  3278  6 24 16:05 known_hosts.old
 ```
 
-## 拷贝本地公钥到远程服务器
+### 拷贝本地公钥到远程服务器
 
 将本地生成的公钥(~/.ssh/id_rsa.pub)拷贝到你需要连接的服务器的/home目录下，远程拷贝指令如下：
 ```shell
@@ -86,7 +88,7 @@ scp -P port ~/.ssh/id_rsa.pub user@ip:/home/id_rsa.pub
 [root@yuanjava home]#
 ```
 
-## 配置mac的config信息
+### 配置mac的config信息
 
 编辑 ~/.ssh/config 文件，增加服务器相关信息：
 ```shell
@@ -146,9 +148,13 @@ Welcome to Service !
 
 **那么，问题来了...**
 
-如果不想设置复杂的ssh秘钥去连接远程服务，有没有办法，答案是：有。操作参考如下：
+如果不想设置复杂的ssh秘钥去连接远程服务，有没有办法实现？
 
-**配置 ~/.ssh/config 文件**
+## 不使用ssh秘钥连接
+
+答案是：有。操作参考如下：
+
+### 配置 ~/.ssh/config 文件
 
 在文件中增加如下内容(服务器信息修改成自己真实的信息)，相比上面ssh秘钥的方法，我们再config中未配置 IdentityFile ~/.ssh/id_rsa 这块的内容
 
@@ -164,7 +170,7 @@ Host yuan
     User root
 ```
 
-**ssh 服务器别名 登录**
+### ssh 服务器别名 登录
 
 通过在mac终端执行 ssh 服务器别名，连接远程服务器
 
