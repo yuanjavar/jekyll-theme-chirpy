@@ -134,13 +134,58 @@ Welcome to Service !
 在mac上新开一个终端，重新连接服务器，如下指令：
 
 ```shell
-# 注意：输入指令后会提醒输入mac生成ssh秘钥时的密码，如果生成mac 秘钥时秘钥设置密码，这里会直接进入远程服务器
-ssh yuan
+# 注意：输入指令后会提醒输入mac生成ssh秘钥时的密码
+weiki@WeikideMacBook-Pro ~ % ssh yuan
+Enter passphrase for key '~/.ssh/id_rsa':
+Last failed login: Tue Sep  6 11:15:18 CST 2022
+Welcome to Service !
+```
+
+到处，通过mac通过ssh秘钥连接远程端服务器环节就分享完成，如果你有多台服务器，只需要在mac的 ~/.ssh/config 文件中配置多个Host，这样就可以在mac终端通过 ssh host别名 切换登录服务器，可以集中管理所有的服务器。
+
+
+**那么，问题来了...**
+
+如果不想设置复杂的ssh秘钥去连接远程服务，有没有办法，答案是：有。操作参考如下：
+
+**配置 ~/.ssh/config 文件**
+
+在文件中增加如下内容(服务器信息修改成自己真实的信息)，相比上面ssh秘钥的方法，我们再config中未配置 IdentityFile ~/.ssh/id_rsa 这块的内容
+
+```text
+# Host后面的内容是服务器别名，用于登录使用，你可以为每个服务器设置一个容易记住的别名
+Host ubuntu
+    HostName 150.230.58.131
+    User ubuntu
+
+Host yuan
+    HostName 192.168.1.112
+    port 22
+    User root
+```
+
+**ssh 服务器别名 登录**
+
+通过在mac终端执行 ssh 服务器别名，连接远程服务器
+
+```shell
+# 注意：此处需要远程服务器
+weiki@WeikideMacBook-Pro ~ % ssh yuan
+root@192.168.1.112's password:
+Last failed login: Tue Sep  6 11:15:18 CST 2022 from 60.177.97.166 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Tue Sep  6 11:14:42 2022 from 60.177.97.166
+
+Welcome to Service !
 ```
 
 
-到处，我们的配置就完成了，如果你有多台服务器，只需要在mac的 ~/.ssh/config 文件中配置多个Host，这样就可以在mac终端通过 ssh host别名 切换登录服务器，可以集中管理所有的服务器。
+## 总结
 
+- 本文分享了mac 通过ssh秘钥和不使用ssh秘钥 2种方式连接远程服务器，两种方式各有使用场景
+- 通过ssh秘钥，可以使用ssh秘钥设置时的密码登录，一般用于服务器秘钥敏感的场景，比如公司服务器对开发人员
+- 不使用ssh秘钥，使用账号/密码登录远程服务器，一般用于服务器秘钥不敏感的场景，比如私人的服务器
+- 通过config配置，可以灵活的通过服务器别名管理和连接多个远程服务器
 
 
 ## 鸣谢
