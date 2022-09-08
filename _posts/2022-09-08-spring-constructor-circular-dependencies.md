@@ -212,7 +212,7 @@ public class UserService {
 
 本文使用的是 Springboot 2.7 启动的，因此整体思路是：Springboot是如何启动 Spring IOC容器？如何加载 Bean？如何 处理 @Lazy注解？
 
-源码查看足迹可以餐卡下面的类：
+源码查看足迹可以参考下面的类：
 
 > Springboot 启动类 main() 调用 org.springframework.boot.SpringApplication#run()
 >
@@ -239,9 +239,7 @@ public class UserService {
 > org.springframework.beans.factory.config.AutowireCapableBeanFactory#resolveDependency()
 >
 
-这里摘取了处理构造器依赖的几个核心方法来解释@Lazy 如何解决循环依赖
-
-UserService构造器注入OrderService是强依赖关系，因此会经过AbstractAutowireCapableBeanFactory#createBeanInstance()中关于构造器逻辑代码:
+这里摘取了处理构造器依赖的几个核心方法来解释@Lazy 如何解决循环依赖，因为 UserService类 构造器注入 OrderService 是强依赖关系，因此会经过 AbstractAutowireCapableBeanFactory#createBeanInstance() 中关于构造器逻辑代码:
 ```java
 // org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#createBeanInstance
 class AbstractAutowireCapableBeanFactory{
