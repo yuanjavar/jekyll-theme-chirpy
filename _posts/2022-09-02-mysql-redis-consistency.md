@@ -31,15 +31,15 @@ excerpt: 接口隔离原则是什么？怎么使用接口隔离原则？
 
 比如，当服务器把同一份数据写入DB1的A表成功，写入DB2的B表失败时，这时也出现了数据不一致
 
-![img.png](../../assets/md/mysql/two-db-two-table.png)
+![img.png](https://yuanjava.cn//assets/md/mysql/two-db-two-table.png)
 
 当服务器把同一份数据写入DB成功，写入redis失败时，也会出现了数据不一致
 
-![img.png](../../assets/md/mysql/redis-mysql.png)
+![img.png](https://yuanjava.cn//assets/md/mysql/redis-mysql.png)
 
 更抽象一些，当服务器把同一份数据写入载体1~载体n成功，只要有一个失败，就会出现了数据不一致
 
-![img.png](../../assets/md/mysql/multi-way.png)
+![img.png](https://yuanjava.cn//assets/md/mysql/multi-way.png)
 
 通过上面的描述我们知道了什么是数据一致性，什么时候会存现数据一致性问题，因此mysql和redis数据的⼀致性就是指：同一份数据写入mysql和redis后，redis中的值 ≠ mysql中的值。
 
@@ -51,7 +51,7 @@ excerpt: 接口隔离原则是什么？怎么使用接口隔离原则？
 何为强一致性，简而言之，在任意时刻，所有载体上的数据都是一样的。
 
 
-**顺序一致性**
+**弱一致性**
 
 
 **最终一致性**

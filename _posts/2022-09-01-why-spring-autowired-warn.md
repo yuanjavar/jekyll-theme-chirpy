@@ -59,7 +59,7 @@ public class SetterBasedInjection {
     public Object setObject(Object object) {
         this.object = object;
     }
-    
+
     public Object getObject() {
         return object;
     }
@@ -85,15 +85,16 @@ public class FiledBasedInjection {
 
 **容易引发NPE**
 
-根据jvm虚拟机初始化类的加载顺序是：静态变量或静态语句块 –> 实例变量或初始化语句块 –> 构造方法 -> @Autowired 的顺序，
-所以在编译时@Autowired 字段为null时不会报错，当调用其方法时出现空指针异常。示例代码：
+因为Spring IOC容器在使用字段依赖注入时，并不会对依赖的bean是否为null做判断，因此在下面的代码中，通过 @Autowired 注入的user对象可能为空，而JVM 虚拟机在编译时也无法检测出user为null，只有在运行时调用user的方法时，
+发现user为null，出现空指针异常(NPE)。
+
 ```java
 @Component
 public class FiledBasedInjection {
     private String name;
     @Autowired
     private final User user;
-    
+
     public FiledBasedInjection(){
         this.name = user.getName(); // NPE
     }
@@ -129,22 +130,22 @@ public class ConstructorBasedInjection {
 }
 
 **其他原因**
-...
+......
 
 ## spring官方推荐的注入方式
-@Autowired使用在基于字段的注入不被官方推荐，替代的方式有很多，比如@Inject，@Resource等注解，但是spring官方强烈推荐使用基于构造器注入的方式。
+
+spring官方强烈推荐使用基于构造器注入的方式。
+
 另外，据小编君观察，像国内，dubbo，rocketMQ等很多开源框架的源码都已经转向了基于构造器的注入方式，所以开发中我们应该尊重spring官方的推荐，尽管其他的方式可以解决，但是不推荐。
 
 不过基于构造器注入有一个潜在的问题就是循环依赖，如下代码，ClassA初始化时需要classB，因此需要去初始化ClassB。
-ClassB初始化时又需要依赖ClassA，进而转向初始化ClassA。所以就形成了经典的"循坏依赖问题"。 不过，spring3.0开始也给出了对应的解决方法，就是在构造器上面增加一个
-@Lazy注解。
-
+ClassB初始化时又需要依赖ClassA，进而转向初始化ClassA。所以就形成了经典的"循坏依赖问题"。 如下代码：
 ```java
 
 @Component
 public class ClassA {
     private final ClassB classB;
-    
+
     @Lazy
     public ClassA(ClassB classB){
         this.classB = classB;
@@ -154,24 +155,21 @@ public class ClassA {
 @Component
 public class ClassB {
     private final ClassA classA;
-    
+
     public ClassB(ClassA classA){
         this.classA = classA;
     }
 }
 ```
 
-预知 @Lazy 注解是如何解决构造器循环依赖，请看下篇文章分解...
+关于 spring 如何解决构造器注入的循环依赖，欢迎查看 [spring如何解决构造器注入的循环依赖？](https://yuanjava.cn/posts/spring-constructor-circular-dependencies/)
 
 ## 总结
 
 - spring注入的方式有：基于字段注入，基于setter方法注入，基于构造器注入 3种方式。
 
-- spring官方不推荐@Autowire使用在基于字段注入方式，推荐基于构造器的注入
-
-- 尽管从很多资料上可以总结出一些不推荐字段注入的原因，但还未看到官方给的理由，所以我们先且尊重spring的建议。
-
-
+- spring官方不推荐@Autowire使用在基于字段注入方式，推荐基于构造器注入，主要原因是：字段依赖注入容易引发 NPE 空指针异常，但是构造器注入时会进行校验，若果依赖的bean找不到就会抛出 NoSuchBeanDefinitionException，具体代码可以参考
+源码 org.springframework.beans.factory.support.ConstructorResolver#resolveAutowiredArgument 实现。
 
 ## 最后
 如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java

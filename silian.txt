@@ -57,3 +57,4 @@ https://www.yuanjava.cn/interview/2022/08/31/http.html
 https://www.yuanjava.cn/common/2022/08/31/seo.html
 https://www.yuanjava.cn/spring/2022/09/01/why-spring-autowired-warn.html
 https://www.yuanjava.cn/spring/2022/09/02/spring-value-null.html
+https://www.yuanjava.cn/assets/images/tip.jpeg
