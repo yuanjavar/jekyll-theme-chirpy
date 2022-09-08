@@ -381,13 +381,23 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 通过CGLib核心的3步解释了，Spring中代理类是如何与真实对象进行关联，因此，orderService关联到真实对象可以抽象成下图：
 
-![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib.png)
+![img.png](https://yuanjava.cn/assets/md/spring/spring-circular-cglib.png)
+
+另外，我们通过3张 IDEA debugger 截图来佐证下：
+
+![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug.png)
+
+![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug2.png)
+
+![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug3.png)
 
 
 ## 总结
 
 - Spring构造器注入循环依赖有3种解决办法：重构代码、字段依赖注入、@Lazy注解。强烈推荐 @Lazy注解
-- @Lazy注解 解决思路是：初始化时注入代理对象，真实调用时使用Spring AOP动态代理去关联真实对象，然后通过反射完成调用。
+- @Lazy注解 解决思路是：初始化时注入代理对象，真实调用时使用Spring AOP动态代理去关联真实对象，然后通过反射完成调用
+- @Lazy注解 加在构造器上，作用域为构造器所有参数，加在构造器某个参数上，作用域为该参数
+- @Lazy注解 作用在接口上，使用 JDK动态代理，作用在类上，使用 CGLib动态代理
 
 
 ## 鸣谢
