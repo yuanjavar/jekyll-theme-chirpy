@@ -385,11 +385,11 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 另外，我们通过3张 IDEA debugger 截图来佐证下：
 
-![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug.png)
+![img.png](https://yuanjava.cn/assets/md/spring/spring-circular-cglib-debug.png)
 
-![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug2.png)
+![img.png](https://yuanjava.cn/assets/md/spring/spring-circular-cglib-debug2.png)
 
-![img.png](https://yuanjava.cn//assets/md/spring/spring-circular-cglib-debug3.png)
+![img.png](https://yuanjava.cn/assets/md/spring/spring-circular-cglib-debug3.png)
 
 
 ## 总结
