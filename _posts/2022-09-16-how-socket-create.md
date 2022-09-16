@@ -27,7 +27,7 @@ Linux操作系统就将权限等级分为了2个等级，分别就是内核态(�
 - 异常：如果当前进程运行在用户态，如果这个时候发生了异常事件，就会触发切换。例如：缺页异常。
 - 外设中断：当外设完成用户的请求时，会向CPU发送中断信号。
 
-![img.png](http://127.0.0.1:4000/assets/md/interview/user-kernel.png)
+![img.png](https://yuanjava.cn/assets/md/interview/user-kernel.png)
 
 ## Socket的种类
 
@@ -111,7 +111,7 @@ struct inode{
 
 整个过程可以描述成如下图：
 
-![img.png](http://127.0.0.1:4000/assets/md/interview/socket.png)
+![img.png](https://yuanjava.cn/assets/md/interview/socket.png)
 
 **主动socket&被动socket&已连接socket&监听socket**
 
