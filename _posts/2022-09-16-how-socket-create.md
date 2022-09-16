@@ -126,16 +126,21 @@ java如何使用socket
 ```java
 // java.net.ServerSocket
 public ServerSocket() throws IOException{}
+
 public ServerSocket(int port) throws IOException{}
+
 public ServerSocket(int port, int backlog) throws IOException {}
+
 public ServerSocket(int port, int backlog, InetAddress bindAddr) throws IOException {}
+
 public void bind(SocketAddress endpoint, int backlog) throws IOException {
-  getImpl().bind(epoint.getAddress(), epoint.getPort());
-  getImpl().listen(backlog);
+    getImpl().bind(epoint.getAddress(), epoint.getPort());
+    getImpl().listen(backlog);
 }
 
 // java.net.PlainSocketImpl
 native void socketBind(InetAddress address, int port) throws IOException;
+
 native void socketListen(int count) throws IOException;
 ```
 
@@ -144,10 +149,15 @@ java源码ServerSocket类中封装了多个构造器，源码调试可以看下�
 ```java
 // java.net.Socket
 public Socket(){}
+
 public Socket(Proxy proxy){}
+
 public Socket(String host, int port) throws UnknownHostException, IOException{}
+
 public Socket(InetAddress address, int port) throws IOException {}
+
 public Socket(String host, int port, InetAddress localAddr, int localPort) throws IOException {}
+
 public void connect(SocketAddress endpoint) throws IOException {
     connect(endpoint, 0);
 }
