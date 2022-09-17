@@ -25,7 +25,7 @@ title: 猿java                          # the main title
 
 tagline: 爱技术，爱生活   # it will display as the sub-title
 
-keywords: 猿java,java分享,技术博客,个人博客,yuanjava,Spring,Spring Boot,Spring Cloud,Redis,Jvm,DDD,分布式,初级开发者,编程,中间件,IT网站
+keywords: java分享,技术博客,个人博客,大学生编程,Spring,Spring Boot,Spring Cloud,Redis,Jvm,DDD,分布式,初级开发者,编程,中间件,IT网站
 
 description: >-                        # used by seo meta and the atom feed
   本站是猿java的技术分享博客。内容涵盖生活故事、Java后端技术、Spring Boot、Spring Cloud、Redis、数据库、微服务架构、分布式、大数据演进、高可用架构、中间件使用、系统监控等相关的研究与知识分享。
