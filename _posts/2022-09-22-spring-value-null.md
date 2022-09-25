@@ -5,7 +5,6 @@ category: spring
 tags: [spring]
 description: 如何解决spring EL注解@Value获取值为null的问题
 keywords: spring, spring @Value注解, spring EL表达式
-excerpt: 如何解决spring EL注解@Value获取值为null的问题
 ---
 
 你好，我是Weiki，欢迎来到猿java。
@@ -44,7 +43,7 @@ applicationName=
 
 ## 错误使用场景
 
-**错误使用场景一**  
+**错误使用场景一**
 
 类未交给spring管理，如下代码：
 
@@ -129,7 +128,7 @@ public class PropertyBean {
 
 @Service
 public class SpringElService {
-    
+
     private final PropertyBean bean;
     // 构造器注入 bean
     public SpringElService(PropertyBean bean){
