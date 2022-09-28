@@ -1,37 +1,59 @@
 ---
 layout: post
-title: 《架构整洁之道》你的代码整洁吗？
+title: 适合初中高级程序员的架构书，力荐这本
 category: book
 tags: [读书]
-description: 《架构整洁之道》你写的代码整洁吗？
+description: 适合初中高级程序员的架构书，力荐这本
 keywords: Clean Architecture,架构整洁之道,代码整洁,代码如何整洁
 ---
 
 你好，我是Weiki，欢迎来到猿java。
 
-干净的代码风格让人赏心悦目，这个毋庸置疑。但是，如何让代码保持干净呢？
-今天就推荐一本经典巨作《Clean Architecture》by Robert C. Martin。
+随着互联网的快速发展，技术更迭的速度也是超乎想象，也许花大力气掌握的技能几年就过时了。但是有一些东西却是历久弥新，比如：架构思想，设计思维，掌握了这些精髓，可以帮助你快速适应技术更迭。今天就推荐一本经典巨作《Clean Architecture》by Robert C. Martin。
+本文从书籍简介，内部归纳，个人思考 对《架构整洁之道》进行了解读。
 
 
-## 本书介绍
+## 书籍简介
 
 Clean Architecture 原版出自 Robert C. Martin，号称 Bob叔叔。[Robert C. Marti 博客](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) ，
-下面给出了英文版和中文版的封面图。
+下面给出了书籍 英文版和中文版的封面图。
 
-![img.png](https://yuanjava.cn/assets/md/book/clean-arch-en.png)
+![img.png](https://yuanjava.cn/assets/md/book/clean-arch.png)
 
-![img.png](https://yuanjava.cn/assets/md/book/clean-arch-zh.png)
+全书 共6大部分，34章，大概324页。
 
-本书最经典的莫过于 三种编程范式 和 SOLID软件设计原则。
+### 本书脉络图
 
-**三种编程范式**
+![img.png](https://yuanjava.cn/assets/md/book/clean-architecture.png)
+
+
+## 内容归纳
+
+### 软件系统的价值
+
+架构是软件系统的一部分，所以要明白架构的价值，首先要明确软件系统的价值。软件系统的价值有两方面，行为价值和架构价值。
+
+行为价值：包括需求的实现，以及可用性保障（功能性 bug、性能、稳定性）等等；
+
+架构价值： 就是让我们的软件能够灵活，简单的支持行为价值；
+
+所以，实际工作中很多时候是在行为价值和架构价值之间的权衡。
+
+### 软件架构的目标
+
+软件架构的终极目标是：用最小的人力成本来满足构建和维护该系统的需求。
+
+架构是一个很宽泛的概念，小到一行代码的设计，大到公司集团的战略设计，很多程序员视乎总喜欢把架构等同于系统架构，认为需要设计一个足够大，
+参与人数足够多的系统才算得上架构，殊不知真正的架构其实是从自己写的每一行代码开始。
+
+### 编程范式
 
 - 结构化编程
 - 面向对象编程
 - 函数式编程
 
 
-**SOLID软件设计原则**
+### 设计原则
 
 - 单一职责原则（Single responsibility principle, SRP）
 - 开放封闭原则（Open–closed principle, OCP）
@@ -39,16 +61,27 @@ Clean Architecture 原版出自 Robert C. Martin，号称 Bob叔叔。[Robert C.
 - 接口隔离原则（Interface segregation principle, ISP）
 - 依赖倒置原则（Dependency inversion principle, DIP）
 
-小编在过往的文章中也对 [SOLID做了总结](https://www.yuanjava.cn/tags/solid/) ，有兴趣的可以前往阅读
+更多关于 [SOLID原则详解](https://www.yuanjava.cn/tags/solid/) ，有兴趣的可以前往阅读
 
-全书 共6大部分，34章，大概324页
 
-## 架构
+### 架构基本方针
 
-<font size=4 color=red>软件架构的终极目标是，用最小的人力成本来满足构建和维护该系统的需求。</font>
+架构工作有两个方针：
 
-  架构是一个很宽泛的概念，小到一行代码的设计，大到公司集团的战略设计，但是，很多程序员视乎总喜欢把架构等同于系统架构，认为需要设计一个足够大，
-参与人数足够多的系统才算得上架构，殊不知真正的架构其实是从自己写的每一行代码开始。
+- 尽可能长时间地保留尽可能多的可选项
+- 低层次解耦方式能解决的，不要用高层次解耦方式
+
+### 组件的拆分
+
+组件拆分需要在两个维度进行：按层次拆分、按变更原因拆分
+
+### 组件依赖处理
+
+下面摘取了作者整洁架构原图，依赖顺序是从外层指向内层(从低层次指向高层次)，通过图可以看出越具体的策略处于越低的层级，比如外部接口，越抽象的的封装处于越高层级，比如：业务实体，持久层，因此可以做到
+下游数据库载体的变更对外层是无感的。
+
+![img.png](https://yuanjava.cn/assets/md/framework/relay.jpeg)
+
 
 
 ## 适合人群
@@ -57,7 +90,7 @@ Clean Architecture 原版出自 Robert C. Martin，号称 Bob叔叔。[Robert C.
 
 强烈推荐阅读...
 
-## 思考
+## 个人思考
 
 很多人 5年成了技术专家，真的是他们天赋异禀吗？
 
