@@ -1,7 +1,7 @@
 ---
 title: 课程
 icon: fas fa-info-circle
-order: 2
+order: 3
 ---
 
 
