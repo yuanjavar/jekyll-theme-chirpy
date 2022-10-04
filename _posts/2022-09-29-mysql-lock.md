@@ -21,7 +21,7 @@ MySQL数据库锁设计的初衷是处理并发问题，保证数据安全。MyS
 
 我们会先讲解共享锁和排它锁，然后讲解全局锁、表级锁和行锁，因为这三种类别的锁中，有些是共享锁，有些是排他锁，最后，我们再讲解 悲观锁和乐观锁。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-lock-outline.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-lock-outline.png)
 
 ## 共享锁&排他锁
 
@@ -53,7 +53,7 @@ select ... for share;
 | #提交事务<br>#user表上的共享锁被释放<br> commit;                     |                                                                |
 |                                                         | #获取user表上的排他锁成功，delete操作执行ok<br>delete from user where id = 1; |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/share-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/share-lock.png)
 
 **给user表id=3的行加共享锁**
 
@@ -67,7 +67,7 @@ select ... for share;
 | #提交事务<br>#user表id=3的行上共享锁被释放<br> commit;                                  |                                                                        |
 |                                                                           | #获取user表id=3行上的排它锁成功<br>#被堵塞的delete操作执行ok<br> delete from user where id = 3;                              |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/share-lock-row.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/share-lock-row.png)
 
 通过上述两个实例可以看出：
 - 当共享锁加在user表上，则其它事务可以再次获取user表的共享锁，其它事务再次获取user表的排他锁失败，操作被堵塞；
@@ -98,7 +98,7 @@ select ... for update;
 | #提交事务<br>#user表上的排他被释放<br> commit;              |                                                          |
 |                                                 | #获取user表上的排他锁成功，操作执行ok<br>delete from user where id = 1; |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/excusive-lock-1.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/excusive-lock-1.png)
 
 **给user表id=3的行对象加排他锁**
 
@@ -112,7 +112,7 @@ select ... for update;
 |                                                                      | #获取user表id=3行上的排它锁成功<br>#被堵塞的delete操作执行ok<br>delete from user where id = 3;              |
 
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/excusive-lock-2.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/excusive-lock-2.png)
 
 ## 全局锁&表级锁&行锁
 
@@ -156,7 +156,7 @@ unlock tables
 | unlock tables； 解锁                 |                |
 | 被堵塞的修改操作执行ok                      | 被堵塞的修改操作执行ok   |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/global-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/global-lock.png)
 
 通过上述的实例可以看出，当加全局锁时，库下面所有的表都处于只能状态，不管是当前事务还是其他事务，对于库下面所有的表只能读，不能执行insert，update，delete，alter，drop等更新操作。
 
@@ -164,7 +164,7 @@ unlock tables
 
 全局锁的典型使用场景是做全库逻辑备份，在备份过程中整个库完全处于只读状态。如下图：
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/global-lock-use.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/global-lock-use.png)
 
 
 - 假如在主库上备份，备份期间，业务服务器不能对数据库执行更新操作，因此涉及到更新操作的业务就瘫痪了；
@@ -172,7 +172,7 @@ unlock tables
 
 从上述分析可以看出，使用全局锁进行数据备份，不管是在主库还是在从库上进行备份操作，对业务总是不太友好。那不加锁行不行？我们可以通过下面还钱转账的例子，看看不加锁会不会出现问题：
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/back_lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/back_lock.png)
 
 - 备份前：账户A 有1000，账户B 有500
 - 此时，发起逻辑备份
@@ -227,7 +227,7 @@ unlock tables;
 | unlock tables; 释放锁                   |                   |
 |                                      | 被堵塞的修改操作执行ok      |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/read-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/read-lock.png)
 
 **写锁**：写锁是一种独占锁，需要注意的是，写锁除了会限制其它线程的操作外，也会限制加锁线程的行为，具体限制如下：
 1. 加锁线程对当前表能进行所有操作，不能对其它表进行任何操作；
@@ -245,7 +245,7 @@ unlock tables;
 | unlock tables; 释放锁                    |                          |
 |                                       | 堵塞在user表的上更新操作执行ok |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/write-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/write-lock.png)
 
 ### 2.2 MDL元数据锁
 
@@ -269,7 +269,7 @@ unlock tables;
 | commit;提交事务，MDL读锁被释放         |                             |
 |                              | 被堵塞的修改操作执行ok                |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/MDL-read-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/MDL-read-lock.png)
 
 为了更好的说明 MDL写锁规则，可以参照下面的顺序执行流和实例图：
 
@@ -284,7 +284,7 @@ unlock tables;
 |                                   |                                   | #被堵塞的select 操作执行ok               |
 
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/MDL-write-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/MDL-write-lock.png)
 
 
 ### 2.3 意向锁
@@ -310,7 +310,7 @@ unlock tables;
 | #user表id=6加共享行锁 ，默认user表会 加上IS锁<br>select * from user where id = 6 for share; |                                                           |
 |                                                                               | # 观察IS锁 <br>select * from performance_schema.data_locks\G |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/intention_lock_share.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/intention_lock_share.png)
 
 
 | 加锁线程 sessionA                                                                | 线程B  sessionB                                           |
@@ -319,7 +319,7 @@ unlock tables;
 | #user表id=6加排他锁，默认user表会 加上IX锁<br>select * from user where id = 6 for update; |                                                         |
 |                                                                              | # 观察IX锁 <br>select * from performance_schema.data_locks\G |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/intention_lock_excusive.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/intention_lock_excusive.png)
 
 
 ### 2.4 AUTO-INC锁
@@ -379,7 +379,7 @@ Record Lock：记录锁，是针对索引记录的锁，锁定的总是索引记
 | commit提交事务<br>record lock 被释放                                     |                                                   |
 |                                                                   | 被堵塞的update操作执行ok                                  |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/record-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/record-lock.png)
 
 
 
@@ -387,7 +387,7 @@ Record Lock：记录锁，是针对索引记录的锁，锁定的总是索引记
 
 Gap Lock：间隙锁，锁住两个索引记录之间的间隙上，由InnoDB隐式添加。比如(1,3) 表示锁住记录1和记录3之间的间隙，这样记录2就无法插入，间隙可能跨越单个索引值、多个索引值，甚至是空。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/gap-lock-table.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/gap-lock-table.png)
 
 为了更好的说明 Gap Lock间隙锁，可以参照下面的顺序执行流和实例图：
 
@@ -400,7 +400,7 @@ Gap Lock：间隙锁，锁住两个索引记录之间的间隙上，由InnoDB隐
 | commit提交事务<br>Gap Lock被释放                            |                                        |
 |                                                        | 被堵塞的insert操作执行ok                       |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/gap-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/gap-lock.png)
 
 上图中，事务A(sessionA)在加共享锁的时候产生了间隙锁(Gap Lock)，事务B(sessionB)对间隙中进行insert/update操作，需要先获取排他锁(X)，导致阻塞。事务C(sessionC)通过"show engine innodb status\G" 指令可以查看到间隙锁的存在。需要说明的，间隙锁只是锁住间隙内部的范围，在间隙外的insert/update操作不会受影响。
 
@@ -410,7 +410,7 @@ Gap Lock锁，只存在于可重复读隔离级别，目的是为了解决可重
 
 Next-Key锁，称为临键锁，它是Record Lock + Gap Lock的组合，用来锁定一个范围，并且锁定记录本身锁，它是一种左开右闭的范围，可以用符号表示为：(a,b]。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/next-key-lock-table.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/next-key-lock-table.png)
 
 为了更好的说明 Next-Key Lock间隙锁，可以参照下面的顺序执行流和实例图：
 
@@ -425,7 +425,7 @@ Next-Key锁，称为临键锁，它是Record Lock + Gap Lock的组合，用来�
 |                                                        | 被堵塞的insert操作执行ok                                                   | 被堵塞的update操作执行ok                             | |
 
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/next-key-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/next-key-lock.png)
 
 上图中，事务A(sessionA)在加共享锁的时候产生了间隙锁(Gap Lock)，事务B(sessionB)对间隙中进行insert操作，需要先获取排他锁(X)，导致阻塞。
 事务C(sessionC)对间隙中进行update操作，需要先获取排他锁(X)，导致阻塞。
@@ -446,7 +446,7 @@ Next-Key锁，称为临键锁，它是Record Lock + Gap Lock的组合，用来�
 | commit提交事务<br>Gap Lock被释放                            |                                                               | |
 |                                                        | #被堵塞的insert操作执行ok <br> insert into user(id,age) values(2,20); | |
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/gap-lock.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/gap-lock.png)
 
 
 ## 乐观锁&悲观锁
