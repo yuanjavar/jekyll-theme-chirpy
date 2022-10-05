@@ -11,6 +11,8 @@ order: 3
 ## MySQL 数据库
 
 [为什么mysql不使用红黑树做索引](https://www.yuanjava.cn/posts/mysqlindex/)
+[一条sql查询语句是如何运行？](https://www.yuanjava.cn/posts/mysql-how-run/)
+[肝了一周，这下彻底把 MySQL的锁搞懂了](https://www.yuanjava.cn/posts/mysql-lock/)
 
 ## http & https
 

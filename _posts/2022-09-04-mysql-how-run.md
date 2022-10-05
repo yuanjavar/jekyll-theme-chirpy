@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 你知道一条sql语句是如何运行的吗？
+title: 一条sql查询语句是如何运行？
 category: mysql
 tags: [mysql]
 description: 一条sql查询语句是如何运行的？
