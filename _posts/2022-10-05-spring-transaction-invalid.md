@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Spring事务失效，我总结了这6个主要原因
+title: Spring事务失效，我总结了这7个主要原因
 category: spring
 tags: [spring,面试]
-description: 关于 Spring 事务失效原因，我总结了这6个主要原因
+description: 关于 Spring 事务失效原因，我总结了这7个主要原因
 keywords: Spring 事务,事务失效
 ---
 
@@ -407,10 +407,163 @@ public class UserServiceImpl implements UserService {
 
 从上文"事务方法不是 public" 的分析可以知道，事务是通过Spring AOP代理来实现的，而 doAddUser()内部事务方法其实是this对象调用的，而不是通过AOP代理来调用的，因此事务失效。
 
+## 7. 事务传播属性使用错误
+
+我们最后对 UserServiceImpl类做修改，addUser()方法不加 @Transactional注解，而是在 addUser()内部调用一个加了 @Transactional注解的 doAddUser()方法，代码如下：
+
+```java
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+  /* user{ "name": "name5", "age": 50 } */
+  @Transactional(propagation = Propagation.SUPPORTS)
+  @Override
+  public void addUser(User user){
+    this.doAddUser(user);
+  }
+
+
+  @Transactional
+  public void doAddUser (User user){
+    userRepository.save(user);
+    throw new RuntimeException();
+  }
+}
+```
+单测运行上面的代码，查询数据库中记录，如下图:
+
+![img.png](https://yuanjava.cn/assets/md/spring/spring-transaction-propagation.png)
+
+通过 client客户端查询user表数据发现：{ "name": "name5", "age": 50 } 记录存在数据库中，并未回滚，事务失效，不符合预期。
+
+为什么事务没有回滚？
+
+我们还是从 Spring源码来找原因：
+
+```java
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Transactional {
+  /**
+   * The transaction propagation type.
+   * <p>Defaults to {@link Propagation#REQUIRED}.
+   * @see org.springframework.transaction.interceptor.TransactionAttribute#getPropagationBehavior()
+   */
+  Propagation propagation() default Propagation.REQUIRED;
+}
+
+public enum Propagation {
+
+  /**
+   * Support a current transaction, create a new one if none exists.
+   * Analogous to EJB transaction attribute of the same name.
+   * <p>This is the default setting of a transaction annotation.
+   */
+  REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
+
+  /**
+   * Support a current transaction, execute non-transactionally if none exists.
+   * Analogous to EJB transaction attribute of the same name.
+   * <p>Note: For transaction managers with transaction synchronization,
+   * {@code SUPPORTS} is slightly different from no transaction at all,
+   * as it defines a transaction scope that synchronization will apply for.
+   * As a consequence, the same resources (JDBC Connection, Hibernate Session, etc)
+   * will be shared for the entire specified scope. Note that this depends on
+   * the actual synchronization configuration of the transaction manager.
+   * @see org.springframework.transaction.support.AbstractPlatformTransactionManager#setTransactionSynchronization
+   */
+  SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS),
+
+  /**
+   * Support a current transaction, throw an exception if none exists.
+   * Analogous to EJB transaction attribute of the same name.
+   */
+  MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
+
+  /**
+   * Create a new transaction, and suspend the current transaction if one exists.
+   * Analogous to the EJB transaction attribute of the same name.
+   * <p><b>NOTE:</b> Actual transaction suspension will not work out-of-the-box
+   * on all transaction managers. This in particular applies to
+   * {@link org.springframework.transaction.jta.JtaTransactionManager},
+   * which requires the {@code javax.transaction.TransactionManager} to be
+   * made available to it (which is server-specific in standard Java EE).
+   * @see org.springframework.transaction.jta.JtaTransactionManager#setTransactionManager
+   */
+  REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
+
+  /**
+   * Execute non-transactionally, suspend the current transaction if one exists.
+   * Analogous to EJB transaction attribute of the same name.
+   * <p><b>NOTE:</b> Actual transaction suspension will not work out-of-the-box
+   * on all transaction managers. This in particular applies to
+   * {@link org.springframework.transaction.jta.JtaTransactionManager},
+   * which requires the {@code javax.transaction.TransactionManager} to be
+   * made available to it (which is server-specific in standard Java EE).
+   * @see org.springframework.transaction.jta.JtaTransactionManager#setTransactionManager
+   */
+  NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
+
+  /**
+   * Execute non-transactionally, throw an exception if a transaction exists.
+   * Analogous to EJB transaction attribute of the same name.
+   */
+  NEVER(TransactionDefinition.PROPAGATION_NEVER),
+
+  /**
+   * Execute within a nested transaction if a current transaction exists,
+   * behave like {@code REQUIRED} otherwise. There is no analogous feature in EJB.
+   * <p>Note: Actual creation of a nested transaction will only work on specific
+   * transaction managers. Out of the box, this only applies to the JDBC
+   * DataSourceTransactionManager. Some JTA providers might support nested
+   * transactions as well.
+   * @see org.springframework.jdbc.datasource.DataSourceTransactionManager
+   */
+  NESTED(TransactionDefinition.PROPAGATION_NESTED);
+
+
+  private final int value;
+
+
+  Propagation(int value) {
+    this.value = value;
+  }
+
+  public int value() {
+    return this.value;
+  }
+
+}
+```
+
+从源码中我们可以得知，Spring事务默认的事务传播机制是：REQUIRED，我们先对 Propagation类中 Spring事务传播机制进行总结：
+
+1. PROPAGATION_REQUIRED：要求使用事务，如果当前没有事务，则创建一个新的事务，如果当前存在事务，就加入该事务，该设置是默认也是最常用的设置。
+2. PROPAGATION_SUPPORTS：支持使用事务，如果当前存在事务，就加入该事务，如果当前不存在事务，就以非事务执行。‘
+3. PROPAGATION_MANDATORY：强制使用事务，如果当前存在事务，就加入该事务，如果当前不存在事务，则抛出异常。
+4. PROPAGATION_REQUIRES_NEW：创建新事务，无论当前存不存在事务，都创建新事务。
+5. PROPAGATION_NOT_SUPPORTED：不支持事务，如果当前存在事务，就把当前事务挂起。
+6. PROPAGATION_NEVER：不允许使用事务，如果当前存在事务，则抛出异常。
+7. PROPAGATION_NESTED：内嵌事务，如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则按REQUIRED属性执行。
+
+
+上述 addUser()方法的事务传播机制是 Propagation.SUPPORTS，也就是当前方法有事务就假如事务，不存在事务则以非事务执行，因为 addUser()方法不存在事务，所以该方法就以非事务执行，因此事务失效。
+
+此案例是典型的 Spring事务传播机制使用错误，我们只需要将 @Transactional(propagation = Propagation.SUPPORTS) 修改成  @Transactional(propagation = Propagation.REQUIRED)，事务就可以生效了。
+
+
 
 ## 总结
 
-本文列举了日常开发中 Spring事务失效常见的6个主要原因，或许在开发中大家还是会遇到其他形形色色的小众原因，但不管怎样，只要我们能去认真去分析 Spring事务相关的源码，很多问题就迎刃而解。
+本文列举了日常开发中 Spring事务失效常见的7个主要原因，通过分析我们可以发现，事务失效的大部分原因是对 Spring的运行机制不够了解。或许在开发中大家还会遇到其他形形色色的原因，但不管怎样，只要我们能去认真去分析 Spring事务相关的源码，很多问题就迎刃而解。
 
 
 ## 鸣谢
