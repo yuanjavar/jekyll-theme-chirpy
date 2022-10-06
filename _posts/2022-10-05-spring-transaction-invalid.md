@@ -3,8 +3,8 @@ layout: post
 title: Spring事务失效，我总结了这7个主要原因
 category: spring
 tags: [spring,面试]
-description: 关于 Spring 事务失效原因，我总结了这7个主要原因
-keywords: Spring 事务,事务失效
+description: Spring事务失效，我总结了这7个主要原因
+keywords: Spring 事务,事务失效,Spring AOP
 ---
 
 你好，我是Weiki，一个践行终身学习的程序员。
