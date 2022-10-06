@@ -3,7 +3,7 @@ layout: post
 title: 如何给自己的静态网站添加giscus评论模块？
 category: common
 tags: [common]
-description: 如何给自己的静态网站添加giscus评论模块？
+excerpt: 如何给自己的静态网站添加giscus评论模块？
 keywords: 个人网站,免费评论模块
 excerpt: 如何给自己的静态网站添加giscus评论模块？
 ---

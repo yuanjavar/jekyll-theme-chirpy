@@ -3,7 +3,7 @@ layout: post
 title: 如何解决spring EL注解@Value获取值为null的问题
 category: spring
 tags: [spring]
-description: 如何解决spring EL注解@Value获取值为null的问题
+excerpt: 如何解决spring EL注解@Value获取值为null的问题
 keywords: spring, spring @Value注解, spring EL表达式
 ---
 

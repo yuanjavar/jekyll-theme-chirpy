@@ -3,7 +3,7 @@ layout: post
 title: 程序员该如何提问技术问题？
 category: java
 tags: [java]
-description: 程序员该如何提问技术问题？
+excerpt: 程序员该如何提问技术问题？
 keywords: 程序员提问,如何优雅提问,技术提问
 ---
 

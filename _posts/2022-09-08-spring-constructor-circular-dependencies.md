@@ -3,7 +3,7 @@ layout: post
 title: spring如何解决构造器注入的循环依赖？
 category: spring
 tags: [spring]
-description: spring如何解决构造器注入的循环依赖？
+excerpt: spring如何解决构造器注入的循环依赖？
 keywords: spring,spring注入,spring constructor注入,spring 循坏依赖
 ---
 

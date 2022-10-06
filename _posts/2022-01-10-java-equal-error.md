@@ -3,7 +3,7 @@ layout: post
 title: Java中的判断相等问题，你踩过几个坑？
 category: java
 tags: [java]
-description: Java中的判断相等问题，你踩过几个坑？？
+excerpt: Java中的判断相等问题，你踩过几个坑？？
 keywords: java 判等, equals
 excerpt: Java中的判断相等问题，你踩过几个坑？
 ---

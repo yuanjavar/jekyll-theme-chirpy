@@ -3,7 +3,7 @@ layout: post
 title: DynamoDB系列之--如何做in查询
 category: DynamoDB
 tags: [DynamoDB]
-description: DynamoDB in 查询
+excerpt: DynamoDB in 查询
 keywords: DynamoDB
 excerpt: DynamoDB是亚马逊内部一款功能强大的NoSql数据库，那么DynamoDB怎么实现和mysql一样的in查询呢？
 ---

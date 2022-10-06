@@ -3,7 +3,7 @@ layout: post
 title: 深入剖析IO多路复用
 category: interview
 tags: [面试]
-description: 面试中经常会问到 IO多路复用，那么你知道它是怎么工作的吗？
+excerpt: 面试中经常会问到 IO多路复用，那么你知道它是怎么工作的吗？
 keywords: java,java面试，IO多路复用
 excerpt: 面试中经常会问到 IO多路复用，那么你知道它是怎么工作的吗？
 ---

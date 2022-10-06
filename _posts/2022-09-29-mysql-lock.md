@@ -3,11 +3,11 @@ layout: post
 title: 肝了一周，这下彻底把 MySQL的锁搞懂了
 category: mysql
 tags: [mysql]
-description:  MySQL 数据库有哪些锁，他们是如何工作的？
+excerpt:  MySQL 数据库有哪些锁，他们是如何工作的？
 keywords: MySQL,MySQL锁,MySQL数据库
 ---
 
-你好，我是Weiki，欢迎来到猿java。
+你好，我是Weiki，一个践行终身学习的程序员。
 
 最近，同事在生产上遇到一个 MySQL死锁的问题，于是在帮忙解决问题后，特意花了一周的时间，把 MySQL所有的锁都整理了一遍，今天就来一起聊聊 MySQL锁。
 

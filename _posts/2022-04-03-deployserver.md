@@ -3,7 +3,7 @@ layout: post
 title: 如何把技术博客部署到自己的服务器
 category: common
 tags: [common]
-description: 如何把技术博客部署到自己的服务器
+excerpt: 如何把技术博客部署到自己的服务器
 keywords: 技术网站,个人博客
 excerpt: 有了技术博客，如何才能被百度收录，希望被更多的技术人看到呢？
 ---

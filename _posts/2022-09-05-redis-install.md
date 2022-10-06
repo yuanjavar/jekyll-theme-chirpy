@@ -3,7 +3,7 @@ layout: post
 title: Redis在各种操作系统下的安装方式
 category: redis
 tags: [redis]
-description: Redis各种方式安装大全
+excerpt: Redis各种方式安装大全
 keywords: redis安装,源码安装,macos安装,linux安装
 ---
 

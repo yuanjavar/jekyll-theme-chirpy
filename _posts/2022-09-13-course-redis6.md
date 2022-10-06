@@ -3,7 +3,7 @@ layout: post
 title: Redis 6.0 零基础快速入门教程
 category: course
 tags: [course,课程]
-description: Redis 6.0 零基础快速入门教程
+excerpt: Redis 6.0 零基础快速入门教程
 keywords: Redis 6.0 课程,快速学习Redis 6.0,Redis 教程
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: 程序员的世界不是只有大厂
 category: java
 tags: [java,感悟]
-description:  程序员的世界不是只有大厂
+excerpt:  程序员的世界不是只有大厂
 keywords: java程序员, 互联网大厂, java学习宝典
 ---
 

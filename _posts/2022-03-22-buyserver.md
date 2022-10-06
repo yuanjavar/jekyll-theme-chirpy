@@ -3,7 +3,7 @@ layout: post
 title: 如何购买云服务器
 category: common
 tags: [common]
-description: 如何购买云服务器
+excerpt: 如何购买云服务器
 keywords: 服务器
 excerpt: 假如某天公司让你选择云服务，然后部署你们的服务，你会怎么选？
 ---

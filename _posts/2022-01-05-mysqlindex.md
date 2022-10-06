@@ -3,7 +3,7 @@ layout: post
 title: 为什么mysql不使用红黑树做索引
 category: mysql
 tags: [mysql]
-description: mysql用了这么久，你知道为什么mysql不使用红黑树做索引吗？
+excerpt: mysql用了这么久，你知道为什么mysql不使用红黑树做索引吗？
 keywords: java,mysq索引，红黑树
 excerpt: mysql用了这么久，你知道为什么mysql不使用红黑树做索引吗？
 ---

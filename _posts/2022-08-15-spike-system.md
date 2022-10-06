@@ -3,7 +3,7 @@ layout: post
 title: 如何设计一个秒杀系统？
 category: interview
 tags: [面试]
-description: 如何设计一个秒杀系统？
+excerpt: 如何设计一个秒杀系统？
 keywords: 秒杀系统,如何设计一个秒杀系统,java秒杀系统,redis在秒杀系统中的作用
 ---
 你好，我是Weiki，欢迎来到猿java。

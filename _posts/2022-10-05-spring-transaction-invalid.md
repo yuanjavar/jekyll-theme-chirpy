@@ -3,14 +3,14 @@ layout: post
 title: Spring事务失效，我总结了这7个主要原因
 category: spring
 tags: [spring,面试]
-description: Spring事务失效，我总结了这7个主要原因
+excerpt: Spring事务失效，我总结了这7个主要原因
 keywords: Spring 事务,事务失效,Spring AOP
 ---
 
 你好，我是Weiki，一个践行终身学习的程序员。
 
 提起事务，很多人自然而然想到 MySQL数据库的 ACID，而 Spring Transaction 作为业务层的事务，也是Java日常开发中必不可少的。然而在工作中，很多开发认为只要在类或者方法上加上 @Transactional注解就可以万事大吉了，
-殊不知事务失效的场景有多种，一个疏忽就可能造成了线上事故，这篇文章我来和你聊一聊导致Spring 事务失效的6个主要原因，帮助你的日常工作避雷。
+殊不知事务失效的场景有多种，一个疏忽就可能造成了线上事故，这篇文章我来和你聊一聊导致Spring 事务失效的 7个主要原因，帮助你的日常工作避雷。
 
 > 申明：本文是基于 Spring 5.3.21 版本，如果没有特殊说明，本文的数据库泛指 MySQL数据库
 

@@ -3,7 +3,7 @@ layout: post
 title: 用了这么多年Redis，你知道Redis名字的由来吗？
 category: redis
 tags: [redis]
-description: redis官网升级了
+excerpt: redis官网升级了
 keywords: redis升级
 ---
 你好，我是Weiki，欢迎来到猿java。

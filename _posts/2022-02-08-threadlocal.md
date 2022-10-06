@@ -3,7 +3,7 @@ layout: post
 title: ThreadLocal如何保证线程安全？
 category: java
 tags: [java,面试]
-description: ThreadLocal如何保证线程安全？
+excerpt: ThreadLocal如何保证线程安全？
 keywords: ThreadLocal, 线程安全
 excerpt: ThreadLocal如何保证线程安全
 ---

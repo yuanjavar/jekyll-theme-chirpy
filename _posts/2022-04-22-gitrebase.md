@@ -3,7 +3,7 @@ layout: post
 title: git rebase和merge的区别
 category: java
 tags: [java]
-description: git rebase和merge的区别
+excerpt: git rebase和merge的区别
 keywords: git rebase, git merge
 excerpt: Git是目前多版本控制的一个主力工具，当把远程分支合到本地时，你知道git merge和git rebase有什么区别吗？
 ---

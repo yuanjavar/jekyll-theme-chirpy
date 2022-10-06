@@ -3,7 +3,7 @@ layout: post
 title: 一条sql查询语句是如何运行？
 category: mysql
 tags: [mysql]
-description: 一条sql查询语句是如何运行的？
+excerpt: 一条sql查询语句是如何运行的？
 keywords: mysql查询,mysql运行,mysql优化
 ---
 

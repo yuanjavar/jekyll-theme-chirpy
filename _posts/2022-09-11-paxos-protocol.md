@@ -3,7 +3,7 @@ layout: post
 title: 分布式算法：Paxos 是如何达成共识的？
 category: arch
 tags: [架构,distributed-algorithm,分布式算法]
-description: 分布式算法：Paxos 是如何达成共识的？
+excerpt: 分布式算法：Paxos 是如何达成共识的？
 keywords: 分布式算法,Paxos算法,共识算法,Basic Paxos,Multi-Paxos
 ---
 
