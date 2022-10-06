@@ -60,7 +60,6 @@ select ... for share;
 | 加锁线程  sessionA                                                            | 线程B  sessionB                                                          | 线程C  sessionC                                                          |
 |---------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
 | #开启事务 <br>begin;                                                          |                                                                        |                                                                        |
-
 | #给user表id=3的行加共享锁<br>select * from user<br> where id = 3 lock in share mode; |                                                                        |                                 |
 |                                                                           | #获取user表id=3行上的共享锁ok<br>#select操作执行成功<br>select * from user where id=3; | #获取user表id=3行上的共享锁ok<br>#select操作执行成功<br>select * from user where id=3; |
 |                                                                           | #获取user表id=3行上的排它锁失败<br>#delete操作被堵塞<br>delete from user where id = 3;  | #获取user表id=4行上的排它锁成功<br>#delete操作执行成功<br>delete from user where id = 4; |
@@ -249,7 +248,7 @@ unlock tables;
 
 ### 2.2 MDL元数据锁
 
-元数据锁：metadata lock，简称MDL，它是在MySQL 5.5版本引进的。元数据锁不用向表锁那样显式的加锁和释放锁，而是在访问表时被自动加上，以保证读写的正确性。加锁和释放锁规则如下：
+元数据锁：metadata lock，简称MDL，它是在MySQL 5.5版本引进的。元数据锁不用像表锁那样显式的加锁和释放锁，而是在访问表时被自动加上，以保证读写的正确性。加锁和释放锁规则如下：
 
 - MDL读锁之间不互斥，也就是说，允许多个线程同时对加了 MDL读锁的表进行CRUD(增删改查)操作；
 - MDL写锁，它和读锁、写锁都是互斥的，目的是用来保证变更表结构操作的安全性。也就是说，当对表结构进行变更时，会被默认加 MDL写锁，因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。
@@ -483,5 +482,6 @@ show engine innodb status\G
 《MySQL实战45讲》
 
 ## 鸣谢
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
 
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>

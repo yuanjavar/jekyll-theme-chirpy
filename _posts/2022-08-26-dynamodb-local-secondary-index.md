@@ -160,9 +160,9 @@ public class Test {
 - 每个本地二级索引都会自动包含其基表中的分区键和排序键；
 - DynamoDB会自动维护本地二级索引，当表中有增、删、改操作时，DynamoDB 会自动把数据的变动维护到索引中；
 - 为了获得更大的查询或扫描灵活性，每个基表最多可以创建五个本地二级索引；
-- 查询本地二级索引时，如果属性已经投影在索引中则直接查询，如果索引中没有，DynamoDB 会自动从基表中获取这些属性，但是可能会造成更长的延迟时间和成本； 
+- 查询本地二级索引时，如果属性已经投影在索引中则直接查询，如果索引中没有，DynamoDB 会自动从基表中获取这些属性，但是可能会造成更长的延迟时间和成本；
 - GetItem 和 BatchGetItem 操作不能应用在本地二级索引上；
-- 可以使用最终一致或强一致读取来查询本地二级索引 
+- 可以使用最终一致或强一致读取来查询本地二级索引
 - DynamoDB基表的partition key和sort key 唯一标识一条数据，但是本地二级索引中，sort key可以不唯一标识数据；
 
 
@@ -194,6 +194,8 @@ public class Test {
 
 [AWS DynamoDb官方文档](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html)
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

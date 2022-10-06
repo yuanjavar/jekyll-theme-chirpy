@@ -130,7 +130,7 @@ public @interface FunctionalInterface {}
 - FunctionalInterface注解只能用于接口类型，而不能用于注释类型、枚举或类，如果此注解用于非接口，则编译器会生成错误信息
 - 只要接口符合函数式接口的特征，不论接口是否加了FunctionalInterface注解，编译器都会把这个接口当做函数式接口处理
 
-## 最后
-本博文从一个list的遍历例子，我们一层一层进入源码，最后进入到FunctionalInterface这个函数式接口，通过官方源码对FunctionalInterface的解释我们对FunctionalInterface函数式接口有了一个整体的了解，接下来的博文我们讲从细节一点一点来分析FunctionalInterface在实际工作中的应用。
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
 
-如果你觉得本博文对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 感谢关注公众号：猿java
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>

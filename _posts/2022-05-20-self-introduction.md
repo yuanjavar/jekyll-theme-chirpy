@@ -98,8 +98,7 @@ excerpt: 自我介绍是java面试中一个必不可少的环节，一个出彩�
 
 过硬的技术能力是根本，出彩的自我介绍是锦上添花，所以平时工作一定要注重能力提升，同时也要注意提高自己的表达能力。
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
 
-
-【推荐阅读】 [java面试中如何给出一个出彩的自我介绍？](https://mp.weixin.qq.com/s?__biz=MzIwNDAyOTI2Nw==&mid=2247484015&idx=1&sn=842c48a427fac81e26413b9c44bc2e99&chksm=96c72e53a1b0a7456bb219ba5e566bad68572066a231c260f967262a84baa06bf1eeb918bbc6&token=1943600699&lang=zh_CN#rd)
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>

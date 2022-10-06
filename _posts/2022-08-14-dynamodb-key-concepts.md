@@ -63,6 +63,8 @@ Read and Write Capacity：读写容量
 在使用MySQL, Postgres, or MongoDB数据库时，当我们需要多个服务器时，就需要设置cpu，内存，硬盘容量等信息，但是使用DynamoDB时，就无需关注这些，只需要配置读取和写入容量单位。 这些单位允许每秒进行给定数量的操作。 同时，DynamoDB 还可以自动扩容读写容量单位。 方便高峰时段动态扩展应用服务。
 
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

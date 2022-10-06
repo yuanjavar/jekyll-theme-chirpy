@@ -401,5 +401,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 
 ## 鸣谢
-如果你觉得本文章有帮助，感谢转发给更多的好友，我们定将呈现更多的干货， 欢迎关注公众号：猿java
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

@@ -31,7 +31,7 @@ public class Person {
     private String name;
     private int age;
     // getter and setter方法
-}   
+}
 ```
 for循坏和stream 实现
 ```java
@@ -50,7 +50,7 @@ private void streaming(){
         List<String> newList=list.stream()
         .filter(p->p.getAge()>20)
         .collect(Collectors.toList());
-}  
+}
 ```
 
 场景二： 筛选出年龄大于20岁并且名字带'张'的用户
@@ -73,7 +73,7 @@ private void streaming(){
         .filter(p -> p.getAge() > 20)
         .filter(p -> p.getName().contains("张"))
         .collect(Collectors.toList());
-}  
+}
 ```
 
 场景三： 筛选出年龄在20到30岁并且名字不为空切带'张'的用户
@@ -97,7 +97,7 @@ private void streaming(){
         .filter(p -> StringUtils.isNotEmpty(p.getName()) && p.getName().contains("张"))
         .map(p -> p.getName())
         .collect(Collectors.toList());
-}  
+}
 ```
 
 通过上面的3个case，我们可以看出stream的复杂性比for循环更线性地扩展。另外，我们可以看到stream的filter(过滤器)，更贴近语义，更容易阅读。
@@ -112,6 +112,8 @@ private void streaming(){
 
 作为程序员，两种方式都必须掌握，为了降低项目的维护成本，请优先考虑使用 Stream API 而不是for循环。 Stream API学习有一定的成本，但从长远利益来看，无论是对项目还是对程序员来说，这种投资都会得到回报。
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

@@ -171,6 +171,8 @@ public class ClassB {
 - spring官方不推荐@Autowire使用在基于字段注入方式，推荐基于构造器注入，主要原因是：字段依赖注入容易引发 NPE 空指针异常，但是构造器注入时会进行校验，若果依赖的bean找不到就会抛出 NoSuchBeanDefinitionException，具体代码可以参考
 源码 org.springframework.beans.factory.support.ConstructorResolver#resolveAutowiredArgument 实现。
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

@@ -23,7 +23,7 @@ excerpt: 如果你的域名是http，在访问网站时，总是会有个烦人�
 ## 下载证书
 > 本文以nginx为例，其他服务器的可以参考阿里云对应的文档
 
-![img.png](https://www.yuanjava.cn/assets/md/java/download-cert.png) 
+![img.png](https://www.yuanjava.cn/assets/md/java/download-cert.png)
 ![img.png](https://www.yuanjava.cn/assets/md/java/download-cert2.png)
 
 下载是一个压缩包，压缩包里面有两个文件：xxx.pem, xxx.key
@@ -45,12 +45,12 @@ mkdir cert
 server {
     listen 443;
     # 你的域名
-    server_name your-domain.com; 
+    server_name your-domain.com;
     ssl on;
-    root /var/www/html; 
+    root /var/www/html;
     index index.html index.htm;
     # 你的证书的名字
-    ssl_certificate  /etc/nginx/cert/xxx.pem; 
+    ssl_certificate  /etc/nginx/cert/xxx.pem;
     #你的证书的名字
     ssl_certificate_key /etc/nginx/cert/xxx.key;
     ssl_session_timeout 5m;
@@ -73,7 +73,7 @@ server {
 
 验证nginx配置是否有误
 ```shell
-nginx -t 
+nginx -t
 ```
 
 返回以下内容代表 nginx.conf 文件无误
@@ -95,6 +95,8 @@ ok，所有的配置完成，接下来就是见证奇迹的时候，浏览器输
 
 注意：免费的ssl证书有效期是1年，如果需要长期维护的域名，记得每年更换证书哦
 
-## 最后
-如果你觉得本文章对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 欢迎关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
 

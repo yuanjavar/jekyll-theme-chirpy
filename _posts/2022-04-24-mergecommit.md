@@ -52,6 +52,8 @@ excerpt: 在使用Git做版本控制开发代码时，难免会出现多个commi
 >
 >本文出自猿[java的博客](https://www.yuanjava.cn)
 
-## 最后
 
-如果你觉得本博文对你有帮助，感谢转发给更多的好友，我们将为你呈现更多的干货， 感谢关注公众号：猿java
+## 鸣谢
+如果你觉得本文章对你有帮助，感谢转发给更多的好友，关注我：猿java，为你呈现更多的硬核文章。
+
+<img src="https://yuanjava.cn/assets/img/pub.jpg" alt="drawing" style="width:300px;"/>
