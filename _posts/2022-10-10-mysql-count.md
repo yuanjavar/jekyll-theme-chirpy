@@ -40,7 +40,7 @@ keywords: count(*)、 count(1)、 count(主键)、 count(非主键)
 - MyISAM 引擎会把表的总行数存在了磁盘上（存放在 information_schema 库中的 PARTITIONS 表中），因此执行 count( * )时会直接返回这个总数，所以 count( * )效率很高，这里指的是不加 where条件。如果增加 where条件，会先根据 where条件查出数据，然后再统计，性能取决于遍历索引树的时间；
 - InnoDB 引擎并没有像 MyISAM引擎那样把表的总行数存储在磁盘，而是在执行 count( * )时，MySQL Server层需要把数据从引擎里面读出来，然后逐行累加，得出总数。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-count-myisam.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-count-myisam.png)
 
 为了更好的理解，我们可以先看下 user表和 person表 两张表 count(*) 的执行计划，结果如图：
 
