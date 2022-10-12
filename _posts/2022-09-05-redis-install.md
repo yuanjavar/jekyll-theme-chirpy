@@ -7,7 +7,7 @@ excerpt: Redis各种方式安装大全
 keywords: redis安装,源码安装,macos安装,linux安装
 ---
 
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 Redis作为nosql的典型代表，在当下互联网行业绝对是不可或缺的缓存神奇。作为刚入门的小伙伴，肯定想自己安装一台Redis服务器开启自己的Redis学习之路，今天我们就把Redis各种安装方式全部整理成文档，希望帮助到你。
 

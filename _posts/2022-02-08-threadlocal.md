@@ -7,7 +7,7 @@ excerpt: ThreadLocal如何保证线程安全？
 keywords: ThreadLocal, 线程安全
 excerpt: ThreadLocal如何保证线程安全
 ---
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 身为java程序员，当你想跳槽加薪(特别是高阶岗位)，ThreadLocal似乎成为了一个不可回避的知识点，除了面试，如果你扒过框架源码，也会在很多场景看到ThreadLocal的身影，ThreadLocal是大牛Doug Lead的杰作，一个从jdk 1.2 版本就存在的宝藏，今天就让我们一起来揭开它那神秘的面纱！
 

@@ -6,7 +6,7 @@ tags: [redis]
 excerpt: redis官网升级了
 keywords: redis升级
 ---
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 ## 背景
  Redis作为知内存数据库的天花板，在很多复杂的高并发，高性能项目中都可以看到，用了这么多年，一直很好奇Redis到底是什么意思，今天总有找到了

@@ -8,7 +8,7 @@ keywords: spring, spring autowired注解, spring字段注解
 excerpt: 为什么spring 不推荐 @Autowired 用于字段注解？
 ---
 
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 作为java程序员，肯定享受了spring给予的开发便捷福利。灵活便捷的注入，让身为码农的我们省去了不少的烦恼，但是，当你在idea里面对字段使用@Autowired注解时，
 会出现一个波浪线的警告"Field injection is not recommended"， 为什么会这样？ 今天我们就来聊一聊其背后的深层原因吧。

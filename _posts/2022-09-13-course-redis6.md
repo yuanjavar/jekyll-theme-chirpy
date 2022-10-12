@@ -7,7 +7,7 @@ excerpt: Redis 6.0 零基础快速入门教程
 keywords: Redis 6.0 课程,快速学习Redis 6.0,Redis 教程
 ---
 
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 猿java推出了《Redis 6.0 零基础快速入门教程》，本系列课程我们将从最基础的知识点开始讲解，适合所有零基础的同学。
 

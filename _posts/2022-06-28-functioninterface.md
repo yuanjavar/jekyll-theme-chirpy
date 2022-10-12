@@ -6,7 +6,7 @@ tags: [java]
 excerpt: 函数接口是什么？它和lambda表达式有什么关系？
 ---
 
-你好，我是Weiki，欢迎来到猿java。
+你好，我是猿java，一个践行终生学习的程序员。
 
 
 ## Lambda官方说明

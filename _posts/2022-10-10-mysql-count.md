@@ -7,7 +7,7 @@ excerpt:  揭秘 count(*)、 count(1)、 count(主键)、 count(非主键) 该�
 keywords: count(*)、 count(1)、 count(主键)、 count(非主键)
 ---
 
-你好，我是Weiki，一个践行终身学习的程序员。
+你好，我是猿java，一个践行终身学习的程序员。
 
 实际工作中我们难免会使用到 MySQL的 count()函数进行统计操作，但是，对于 count(1)、count(*)、count(主键)、count(非主键) 等多种 count()操作，我们往往比较疑惑该如何选择，今天我们就来聊聊这些 count()的效率以及背后的实现原理。
 
@@ -102,7 +102,7 @@ keywords: count(*)、 count(1)、 count(主键)、 count(非主键)
 
 按照 MySQL官方的说法： "show table status"命令显示行数的误差率在 40% ~ 50%。
 
-> show table status 查询的是系统 information_schema 库中的 TABLES 表
+> show table status 查询的是系统 information_schema 库中的 TABLES 表，关于表字段可以参考官方文档：[TABLES 官方文档](https://docs.oracle.com/cd/E17952_01/mysql-8.0-en/information-schema-partitions-table.html)
 
 需要说明的是：尽管 InnoDB引擎的 count( * )操作需要扫描全表，但是 MySQL还是有做过优化处理，具体优化如下：
 
