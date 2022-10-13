@@ -736,6 +736,10 @@ ThreadPoolExecutor executor=new ThreadPoolExecutor(2,
 - 有界队列，当线程池的队列满了后，被拒绝的任务如何处理；
 - 无界队列，当任务的提交速度大于线程池的处理速度，可能会导致内存溢出；
 
+### 1.5 为什么不推荐使用Executors包装的线程池？
+从上面的线程池的种类可以看出：
+- newFixedThreadPool线程池，由于使用了LinkedBlockingQueue，队列的容量默认是无限大，如果任务堆积过多时可能导致内存溢出；
+- newCachedThreadPool线程池，由于核心线程数无限大，当任务过多的时候，会导致创建大量的线程，可能机器负载过高，导致服务宕机；
 
 ## 总结
 
