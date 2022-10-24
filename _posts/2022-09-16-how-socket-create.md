@@ -7,7 +7,7 @@ description: Socket是如何创建的？
 keywords: Socket,Socket创建
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 说起网络通信，就不得不提到 Socket，不管使用的是Java语言，还是C/C++，Go，PHP，只要你跟网络打交道，基本上离不开Socket。那么 Socket到底是什么？ 它又是如何被创建的？ 这篇文章，我们就来讲清楚。
 

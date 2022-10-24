@@ -5,7 +5,7 @@ category: DynamoDB
 tags: [DynamoDB]
 excerpt: Redis作为NoSQL的翘楚，为什么亚马逊还要推出DynamoDB数据库？
 ---
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 Redis作为NoSQL的翘楚，为什么亚马逊还要推出DynamoDB数据库？今天我们就来聊聊DynamoDB是什么？
 

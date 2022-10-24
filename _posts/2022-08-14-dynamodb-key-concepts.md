@@ -5,7 +5,7 @@ category: DynamoDB
 tags: [DynamoDB]
 excerpt: DynamoDB作为亚马逊重磅推出的NoSql数据库，在亚马逊去Oracle数据库之后也开始在使用自家的DynamoDB，那么DynamoDB 有哪些核心的概念呢？
 ---
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 DynamoDB作为亚马逊重磅推出的NoSql数据库，在亚马逊去Oracle数据库之后也开始在使用自家的DynamoDB，那么DynamoDB 有哪些核心的概念呢？今天我们就来一起聊聊
 

@@ -7,7 +7,7 @@ excerpt: 一条sql查询语句是如何运行的？
 keywords: mysql查询,mysql运行,mysql优化
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 作为一名java后端程序员，MySQL应该是接触最多的数据库之一，增删改查(CRUD)更是对MySQL数据库的常规操作。
 那么，一条SQL语句在执行的过程中经历了哪些流程呢？今天我们就来聊聊SQL语句是怎么执行的，因为MySQL涉及的知识点太多，

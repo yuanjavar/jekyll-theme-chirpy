@@ -7,9 +7,9 @@ excerpt:  深度剖析：线程池运行原理及常见面试题，看完这篇�
 keywords: 线程池,线程,java线程,阻塞队列,线程中断
 ---
 
-你好，我是猿java，一个践行终身学习的程序员。
+你好，我是猿java。
 
-今天我们开门见山，直奔主题。
+今天我们开门见山，直奔主题：线程池。
 
 > 申明：本文基于 jdk-11.0.15
 
@@ -17,6 +17,10 @@ keywords: 线程池,线程,java线程,阻塞队列,线程中断
 
 内容大纲：
 ![img.png](https://www.yuanjava.cn/assets/md/java/threadpool-outline.png)
+
+## 线程池是什么
+
+线程池（Thread Pool）是一种基于池化思想管理线程的工具，经常出现在多线程服务器中
 
 ## 线程池核心属性
 
@@ -30,7 +34,7 @@ keywords: 线程池,线程,java线程,阻塞队列,线程中断
 
 ### corePoolSize
 
-核心线程数，当提交新任务，如果线程池中的线程数小于 corePoolSize，即便其他的工作线程处于空闲状态，线程池也会创建一个新线程来处理该任务；
+核心线程数，当提交新任务，如果线程池中的线程数量小于 corePoolSize，即便其它线程处于空闲状态，线程池也会创建一个新线程来处理该任务；
 
 ### maximumPoolSize
 
@@ -93,15 +97,13 @@ threadFactory中使用特殊的线程子类、优先级等功能。
 
 ![img.png](https://www.yuanjava.cn/assets/md/java/threadpool-runstate.png)
 
-在 java.util.concurrent.ThreadPoolExecutor 源码中，有一个 ctl 变量可以获取线程池的生命周期，并且通过 advanceRunState()
-方法进行生命周期状态值的切换，ctl是一个包含了 workerCount 和 runState两个字段的原子整数，共 32bit。
+线程池运行状态是通过 ctl变量进行存储的，ctl包装了 workerCount 和 runState两个字段，共 32bit，源码如下：
 
 ```java
 public class ThreadPoolExecutor extends AbstractExecutorService {
     private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 }
 ```
-
 workerCount：指的是线程池中的工作线程数；
 
 runState：指的是线程池的运行状态，包含 RUNNING、SHUTDOWN、STOP、TIDYING、TERMINATED 5种；
@@ -110,7 +112,9 @@ ctl 结构如下图：
 
 ![img.png](https://www.yuanjava.cn/assets/md/java/threadpool-ctl.png)
 
+
 ## 线程池工作机制
+
 下面整理了一张线程池工作的核心流程图：
 
 ![img.png](https://www.yuanjava.cn/assets/md/java/thread-working-principle.png)
@@ -422,12 +426,11 @@ Worker类总结：
 - Worker类继承了AQS，使用了 AQS实现独占锁的功能。
 - 为什么不使用 ReentrantLock可重入锁来实现？
   从源码的 tryAcquire()方法可以看出它是不允许重入的，而ReentrantLock是允许可重入的：
-
-1、lock方法一旦获取独占锁，表示当前线程正在执行任务中；
-2、如果正在执行任务，则不应该中断线程；
-3、如果该线程现在不是独占锁的状态，也就是空闲状态，说明它没有处理任务，这时可以对该线程进行中断；
-4、线程池中执行shutdown方法或tryTerminate方法时会调用interruptIdleWorkers方法来中断空闲线程，interruptIdleWorkers方法会使用tryLock方法来判断线程池中的线程是否是空闲状态；
-5、之所以设置为不可重入的，是因为在任务调用setCorePoolSize这类线程池控制的方法时，不会中断正在运行的线程所以，Worker继承自AQS，用于判断线程是否空闲以及是否处于被中断。
+1. lock方法一旦获取独占锁，表示当前线程正在执行任务中；
+2. 如果正在执行任务，则不应该中断线程；
+3. 如果该线程现在不是独占锁的状态，也就是空闲状态，说明它没有处理任务，这时可以对该线程进行中断；
+4. 线程池中执行shutdown方法或tryTerminate方法时会调用interruptIdleWorkers方法来中断空闲线程，interruptIdleWorkers方法会使用tryLock方法来判断线程池中的线程是否是空闲状态；
+5. 之所以设置为不可重入的，是因为在任务调用setCorePoolSize这类线程池控制的方法时，不会中断正在运行的线程所以，Worker继承自AQS，用于判断线程是否空闲以及是否处于被中断。
 
 ### runWorker()
 
@@ -620,43 +623,60 @@ ThreadPoolExecutor executor=new ThreadPoolExecutor(2,
 
 ### 使用 Executors提供的方法
 
-- newFixedThreadPool：固定线程数的线程池，corePoolSize = maximumPoolSize，keepAliveTime = 0，堵塞队列为无界的
-  LinkedBlockingQueue。适用于为了满足资源管理的需求，而需要限制当前线程数量的场景，适用于负载比较重的服务器。
+**newFixedThreadPool**
 
-- newSingleThreadExecutor：只有一个线程的线程池，corePoolSize = maximumPoolSize = 1，keepAliveTime = 0，堵塞队列为无界的
-  LinkedBlockingQueue。适用于需要顺序执行的业务场景。
+固定线程数的线程池，corePoolSize = maximumPoolSize，keepAliveTime = 0，工作队列为无界堵塞队列 LinkedBlockingQueue。
+- 优点：线程数是固定的，不会无限增长。
+- 缺点：线程数是固定的，无法动态调整；工作队列是无界的，如果任务堆积过多可能导致内存溢出；不支持自定义拒绝策略
 
-- newCachedThreadPool： 按需要创建新线程的线程池。核心线程数为0，最大线程数为
-  Integer.MAX_VALUE，keepAliveTime为60秒，工作队列使用同步移交
-  SynchronousQueue。该线程池可以无限扩展，当需求增加时，可以添加新的线程，而当需求降低时会自动回收空闲线程。适用于执行很多的短期异步任务，或者是负载较轻的服务器。
+**newSingleThreadExecutor**
 
-- newScheduledThreadPool：创建一个以延迟或定时的方式来执行任务的线程池，堵塞队列为 DelayedWorkQueue。适用于需要多个后台线程执行周期任务。
+只有一个线程的线程池，corePoolSize = maximumPoolSize = 1，keepAliveTime = 0，工作队列为无界堵塞队列 LinkedBlockingQueue。
+- 优点：可以顺序执行任务
+- 缺点：线程数为1，不支持并发，无法动态调整；工作队列是无界的，如果任务堆积过多可能导致内存溢出；不支持自定义拒绝策略
 
-- newWorkStealingPool：可窃取的线程池（名字很难直接看下线程池的含义），JDK 1.8 新增，底层使用 ForkJoinPool 实现。
+**newCachedThreadPool**
+
+按需要创建新线程的线程池，核心线程数为0，最大线程数为 Integer.MAX_VALUE，keepAliveTime = 60s，工作队列使用同步SynchronousQueue。
+- 优点：可以无线添加新的线程，当需求降低时会自动回收空闲线程。适用于执行很多的短期异步任务，或者是负载较轻的服务器。
+- 缺点：不支持自定义拒绝策略
+
+**newScheduledThreadPool**
+
+创建一个以延迟或定时的方式来执行任务的线程池，堵塞队列为 DelayedWorkQueue。
+- 优点：适用于需要多个后台线程执行周期任务
+- 缺点：任务是单线程方式执行，一旦一个任务失败其他任务也受影响；不支持自定义拒绝策略
+
+**newWorkStealingPool**
+
+窃取（抢占式操作）线程池，JDK 1.8 新增，底层使用 ForkJoinPool 实现，1个任务拆分成多个"小任务"，"小任务"被分发到多个线程上执行，"小任务" 都执行完成后，再将结果合并。每一个线程都有一个自己的队列，当线程发现自己的队列没有任务了，就会到其它线程的队列里获取任务执行，这个过程理解为"窃取"。
+和上面 4种线程池有很明显的区别，前 4种线程池都有核心线程数、最大线程数等等，而这就使用了一个并发线程数解决问题，任务的执行是无序的，哪个线程抢到任务。
+- 优点：每个线程有自己的队列，可以减少队列的争用，适合并发量大的任务
+- 缺点：不会保证任务的顺序执行，不支持自定义拒绝策略
 
 ## 线程池终止方式
 
 终止线程池主要有两种方式：
 
-- shutdown()：“温柔”的关闭线程池。不接受新任务，但是在关闭前会将之前提交的任务处理完毕。
-- shutdownNow()：“粗暴”的关闭线程池，也就是直接关闭线程池，通过 Thread#interrupt() 方法终止所有线程，不会等待之前提交的任务执行完毕。但是会返回队列中未处理的任务。
+- shutdown()：不接受新任务，但是在关闭前会将之前提交的任务处理完毕。
+- shutdownNow()：直接关闭线程池，通过 Thread.interrupt()方法终止所有线程，不会等待之前提交的任务执行完毕,但是会返回队列中未处理的任务。
 
 ## 如何配置线程池
 
-线程池参数的配置，我们会依据服务器的工作类型来设置，参考意见如下：
+线程池参数的配置，会依据服务器的工作类型来设置，参考意见如下：
 
 - 计算密集型，设置 线程数 = CPU数 + 1；
 
 - I/O密集型，线程数 = CPU数 * 2；
 
-但是在实际开发中，服务器很难完全区分是哪一种类型，因此一个比较合理的设置是： 线程数 = CPU数 * CPU利用率 * (任务等待时间 /
-任务计算时间 + 1)
+但是在实际开发中，服务器很难完全区分是哪一种类型，因此一个比较合理的设置是：
 
-比如，有个程序部署在4核的服务器上用于计算任务，假设任务计算时间是 100ms，等待 I/O操作为 400ms，则线程数约为：4 * 1 * (1 + 400
-/ 100) = 20个。
+线程数 = CPU数 * CPU利用率 * (任务等待时间 / 任务计算时间 + 1)
 
-不过，上面的都是参考值，在实际生产中的做法是，经过压测得出最佳线程数，并且把 corePoolSize 和 maximumPoolSize
-设计成可配置化参数，一旦需要调整大小，可以直接通过配置中心来完成，以免重新发代码。
+比如，程序部署在 4核的服务器上用于任务计算，假设任务计算时长是 100ms，等待 I/O操作为 400ms，则线程数约为：4 * 1 * (1 + 400 / 100) = 20个
+
+不过，上面的都是参考值，在实际生产中的做法是：经过压测得出最佳线程数，并且把 corePoolSize 和 maximumPoolSize
+设计成可配置化参数，一旦需要调整大小，可以直接通过配置中心来完成，以免重新发布代码。
 
 ## 常见面试题
 
@@ -711,10 +731,7 @@ ThreadPoolExecutor executor=new ThreadPoolExecutor(2,
 
 ### 10.如何终止线程池？
 
-  shutdownNow() 和 shutdown() 都是用来终止线程池的，调用 shutdown()方法程序不会报错，也不会立即终止线程，它会等待线程池中的缓存任务执行完之后再退出，执行了
-  shutdown() 之后就不能给线程池添加新任务了；执行 shutdownNow()方法会试图立即停止任务，线程中的任务不会再执行，也无法添加新的任务。
-
-不过，调用 shutdownNow() 和 shutdown()方法，线程池不一定退出，因为线程池会调用
+参考上述 终止线程池 章节
 
 ### 11.为什么线程池中要使用堵塞队列？
   - 主要原因：线程从阻塞队列取任务时，如果阻塞队列不为空则立即返回，如果为空，则线程会被阻塞，一直等待，直到队列中有新的任务，这样就充分的利用了阻塞队列
@@ -737,9 +754,11 @@ ThreadPoolExecutor executor=new ThreadPoolExecutor(2,
 - 无界队列，当任务的提交速度大于线程池的处理速度，可能会导致内存溢出；
 
 ### 1.5 为什么不推荐使用Executors包装的线程池？
-从上面的线程池的种类可以看出：
-- newFixedThreadPool线程池，由于使用了LinkedBlockingQueue，队列的容量默认是无限大，如果任务堆积过多时可能导致内存溢出；
-- newCachedThreadPool线程池，由于核心线程数无限大，当任务过多的时候，会导致创建大量的线程，可能机器负载过高，导致服务宕机；
+
+参考上述 线程池创建方式 章节
+
+
+
 
 ## 总结
 

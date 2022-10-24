@@ -7,7 +7,7 @@ excerpt: 如何解决spring EL注解@Value获取值为null的问题
 keywords: spring, spring @Value注解, spring EL表达式
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 很多时候，我们会使用到Spring的EL表达式，通过@Value("${xxx.xxx}")注解方式从属性文件中获取配置信息，但是，稍不注意，获取的值就为null，
 今天我们就来聊聊Spring @Value 使用应该注意的点。

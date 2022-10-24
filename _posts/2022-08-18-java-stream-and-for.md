@@ -5,7 +5,7 @@ category: java
 tags: [java]
 excerpt: 工作中你用同时使用过java中的for循环和jdk8开始引入的java stream API吗？ 你觉得他们有性能差吗？
 ---
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
  在实际工作中，或许你最开始接触jdk7，或许是jdk8或者是jdk11，对于java中的for循环和jdk8开始引入的java stream的使用大家各持意见，有人说java stream比for循环性能高，有人说java stream晦涩难懂，今天，我们就从代码的长期可维护性的角度来来谈谈 Streaming API和for循环的区别。
 

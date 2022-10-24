@@ -7,7 +7,7 @@ excerpt: 颠覆认知：synchronized 一定会加锁吗？
 keywords: synchronized,java锁,synchronized锁
 ---
 
-你好，我是猿java，一个践行终身学习的程序员。
+你好，我是猿java。
 
 最近，小伙伴求助"
 

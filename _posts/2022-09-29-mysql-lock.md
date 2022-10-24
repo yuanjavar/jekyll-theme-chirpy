@@ -7,7 +7,7 @@ excerpt:  MySQL 数据库有哪些锁，他们是如何工作的？
 keywords: MySQL,MySQL锁,MySQL数据库
 ---
 
-你好，我是猿java，一个践行终身学习的程序员。
+你好，我是猿java。
 
 最近，同事在生产上遇到一个 MySQL死锁的问题，于是在帮忙解决问题后，特意花了一周的时间，把 MySQL所有的锁都整理了一遍，今天就来一起聊聊 MySQL锁。
 

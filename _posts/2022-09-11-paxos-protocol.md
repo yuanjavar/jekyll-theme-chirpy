@@ -7,7 +7,7 @@ excerpt: 分布式算法：Paxos 是如何达成共识的？
 keywords: 分布式算法,Paxos算法,共识算法,Basic Paxos,Multi-Paxos
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 提到分布式算法，就不得不说 Paxos算法，曾在一段时间里，Paxos 几乎成了分布式共识的代名词，现如今很多流行的算法，
 比如：ZAB，Raft 都是基于 Paxos 改进而来，这足以看出 Paxos的重要性。

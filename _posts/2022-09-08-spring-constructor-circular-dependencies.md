@@ -7,6 +7,8 @@ excerpt: spring如何解决构造器注入的循环依赖？
 keywords: spring,spring注入,spring constructor注入,spring 循坏依赖
 ---
 
+你好，我是猿java。
+
 前面文章我们讲解了 [为什么spring 不推荐 @Autowired 用于字段注解？](https://www.yuanjava.cn/posts/why-spring-autowired-warn/)
 有兴趣的可以去看看。尽管spring不推荐 @Autowired 用于字段依赖注入，但是，对于字段依赖注入的循环依赖，spring官方通过三层缓存天然解决了。
 而构造器注入带来的循环依赖问题，就是今天需要分享的内容。

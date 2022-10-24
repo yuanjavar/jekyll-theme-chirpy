@@ -7,7 +7,7 @@ excerpt:  揭秘 count(*)、 count(1)、 count(主键)、 count(非主键) 该�
 keywords: count(*)、 count(1)、 count(主键)、 count(非主键)
 ---
 
-你好，我是猿java，一个践行终身学习的程序员。
+你好，我是猿java。
 
 实际工作中我们难免会使用到 MySQL的 count()函数进行统计操作，但是，对于 count(1)、count(*)、count(主键)、count(非主键) 等多种 count()操作，我们往往比较疑惑该如何选择，今天我们就来聊聊这些 count()的效率以及背后的实现原理。
 

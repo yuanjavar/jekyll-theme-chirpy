@@ -8,7 +8,7 @@ keywords: DynamoDB
 excerpt: DynamoDB是亚马逊内部一款功能强大的NoSql数据库，那么DynamoDB怎么实现和mysql一样的in查询呢？
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 最近在折腾AWS(亚马逊)的一些产品，开发中用到了DynamoDB这款NoSql数据库，需求是需要对user表做user_id in查询，中间查阅了dynamoDB的很多API doc，最后终于写出了一个可以使用的test demo，代码如下：
 

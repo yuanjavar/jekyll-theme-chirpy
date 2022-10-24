@@ -8,7 +8,7 @@ keywords: git rebase, git merge
 excerpt: Git是目前多版本控制的一个主力工具，当把远程分支合到本地时，你知道git merge和git rebase有什么区别吗？
 ---
 
-你好，我是猿java，一个践行终生学习的程序员。
+你好，我是猿java。
 
 最近和几个小伙伴在基于github私有仓库进行开发，在把远程master合并到本地分支时，很习惯了使用了git merge，结果小伙伴们说他们的是使用git rebase的，因此特定去比较了两者的区别：
 
