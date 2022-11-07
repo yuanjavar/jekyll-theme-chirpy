@@ -56,6 +56,11 @@ Java语言的雏形，最初被命名为Oak，后来在 Sun公司的推动下，
 下图总结了 JDK从第一个发布版本到现在所有的版本信息：
 ![img.png](https://yuanjava.cn/assets/md/java/jdk-version.png)
 
+从上图可以看出，最开始 Sun公司是以 JDK（Java SE Development Kits，Java 开发包）命名，从1.2 版本起，修改成以 J2SE（Java 2 Platform, Standard Edition）命名，从 Java SE 6后 Java不再带有"2" 这个号码，后面的版本全部以 Java SE + 数字版本 命名。
+
+尽管在 Java发展历史上出现过好多名词，比如 J2SE，J2ME，J2EE，但还是可以笼统的认为：Java = Java SE = JDK。
+
+
 针对几个长期维护版本，列举了其重要功能升级：
 
 ### JDK 8
@@ -109,14 +114,13 @@ Java语言的雏形，最初被命名为Oak，后来在 Sun公司的推动下，
 
 
 > 备注： LTS： long time support，长时间支持
->
 
 
 ## 如何选择版本
 
 通过上面的介绍可以看出，JDK 8，JDK 11，JDK 17 是 3个长期维护的版本，但因为 JDK 17是 2021年发布的 GA版本，所以，生产上尽量选择 JDK 8 或者 JDK 11。
 
-在 JDK版本的选择上，尽量选择长期维护的版本，不要使用最新版本的。因为新版本的 JDK没有经过生产环境的验证，如果想成为第一个吃螃蟹的人，一定要三思能否hold住。
+在 JDK版本的选择上，尽量选择长期维护的版本，不要使用最新版本的。因为新版本的 JDK，新功能没有经过生产环境的验证，如果想成为第一个吃螃蟹的人，一定要三思能否 hold得住。
 
 
 ## 参考
