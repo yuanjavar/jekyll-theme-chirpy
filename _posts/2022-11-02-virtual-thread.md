@@ -1,13 +1,15 @@
 ---
 layout: post
-title: 千呼万唤始出来：Java终于推出了"协程"--虚拟线程!
+title: 千呼万唤始出来：Java终于发布了"协程"--虚拟线程!
 category: java
 tags: [java]
-excerpt: 千呼万唤始出来：Java终于推出了"协程"--虚拟线程！
+excerpt: 千呼万唤始出来：Java终于发布了"协程"--虚拟线程！
 keywords: Java平台线程,Java虚拟线程,Go协程
 ---
 
 你好，我是猿java。
+
+今天分享的内容是 Java 的一个重量级功能：虚拟线程。
 
 ## 背景
 
