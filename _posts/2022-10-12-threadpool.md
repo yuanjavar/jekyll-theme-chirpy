@@ -13,14 +13,27 @@ keywords: 线程池,线程,java线程,阻塞队列,线程中断
 
 > 申明：本文基于 jdk-11.0.15
 
-线程池是 JDK 1.5版本开始引入，由大牛 Doug Lea实现，源码类为 java.util.concurrent.ThreadPoolExecutor。
+
+
+## 为什么有线程还需要线程池
+
+关于 Java线程，有兴趣可以参考小编过往的文章：[深度剖析：Java线程运行机制，程序员必看的知识点！](https://mp.weixin.qq.com/s?__biz=MzIwNDAyOTI2Nw==&mid=2247484253&idx=1&sn=4df8111a0d3c8b1c7d9c2d64cc3aac9b&chksm=96c72f61a1b0a67749c5f2c1377f24294e61e8791d363db206a91f7887f0e8bc899388a89e86&token=146507984&lang=zh_CN#rd)
+
+我们先看下线程的几个缺陷：
+
+- Java的线程最终是由操作系统创建的，因此线程的创建，调度都受限于操作系统的处理能力；
+- 线程在 Java中是一种宝贵的资源，如果程序创建线程时控制不当，可能导致资源耗尽的风险；
+- 互联网的快速发张，很多业务场景会涉及到多线程；
+
+鉴于上面的
+
 
 内容大纲：
 ![img.png](https://www.yuanjava.cn/assets/md/java/threadpool-outline.png)
 
 ## 线程池是什么
 
-线程池（Thread Pool）是一种基于池化思想管理线程的工具，经常出现在多线程服务器中
+线程池（Thread Pool）是 JDK 1.5版本开始引入，由大牛 Doug Lea实现，本文的线程池是指J.U.C提供的 java.util.concurrent.ThreadPoolExecutor 类。 它是一种基于池化思想管理线程的工具，更直白的说，线程池就是用来帮助程序员更优的管理线程的工具。
 
 ## 线程池核心属性
 
@@ -756,7 +769,6 @@ ThreadPoolExecutor executor=new ThreadPoolExecutor(2,
 ### 1.5 为什么不推荐使用Executors包装的线程池？
 
 参考上述 线程池创建方式 章节
-
 
 
 
