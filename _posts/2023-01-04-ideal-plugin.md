@@ -7,7 +7,7 @@ excerpt: 免费且超实用的 IntelliJ 插件，强烈推荐！！！
 keywords:  IntelliJ 提效插件
 ---
 
-你好，我是猿java。
+Hello，大家好，我是猿java。
 
 作为一名 Java程序员，IntelliJ 应该是非常主流的开发工具，今天推荐几款个人工作中经常使用的插件，真的是免费又超实用。
 
