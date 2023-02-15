@@ -1,6 +1,6 @@
 ---
 layout: post
-title: spring如何解决构造器注入的循环依赖？
+title: 源码解读：Spring如何解决构造器注入的循环依赖？
 category: spring
 tags: [spring]
 excerpt: spring如何解决构造器注入的循环依赖？
@@ -9,20 +9,16 @@ keywords: spring,spring注入,spring constructor注入,spring 循坏依赖
 
 你好，我是猿java。
 
-前面文章我们讲解了 [为什么spring 不推荐 @Autowired 用于字段注解？](https://www.yuanjava.cn/posts/why-spring-autowired-warn/)
-有兴趣的可以去看看。尽管spring不推荐 @Autowired 用于字段依赖注入，但是，对于字段依赖注入的循环依赖，spring官方通过三层缓存天然解决了。
-而构造器注入带来的循环依赖问题，就是今天需要分享的内容。
+Spring 循环依赖一般包含 构造器注入循环依赖 和字段注入（setter方式）循环依赖， 字段注入循环依赖，Spring 官方通过三层缓存解决。而今天分享的重点是：Spring 是如何解决构造器注入产生的循环依赖问题？
 
-> 申明：本文源码 基于 springboot-2.7.0 和 spring-5.3.20 和 JDK11
+> 申明：本文源码 基于 springboot-2.7.0 、spring-5.3.20 和 JDK11
 >
 > 注意：从 springboot-2.7.0 开始，不再推荐 使用 /META-INF/spring.factories 文件所指定的配置类去加载Bean。
 
 ## 背景
 
-前一段时间业务开发，代码写完后准备启动服务，结果 IDEA 报错了，错误信息如下：
+前段时间，因部门同事遇到一个 Spring 循环依赖的问题，IDEA 错误信息如下：
 ```text
-2022-09-08 09:48:15.400 ERROR 68869 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   :
-
   ***************************
   APPLICATION FAILED TO START
   ***************************
@@ -32,9 +28,9 @@ keywords: spring,spring注入,spring constructor注入,spring 循坏依赖
   The dependencies of some of the beans in the application context form a cycle:
 
   ┌─────┐
-  |  orderService defined in file [.https://yuanjava.cn//target/classes/cn/yuanjava/spring/OrderService.class]
+  |  orderService defined in file [./target/classes/cn/xxx/spring/OrderService.class]
   ↑     ↓
-  |  userService defined in file [.https://yuanjava.cn//target/classes/cn/yuanjava/spring/UserService.class]
+  |  userService defined in file [./target/classes/cn/xxx/spring/UserService.class]
   └─────┘
 
   Action:
@@ -43,12 +39,34 @@ keywords: spring,spring注入,spring constructor注入,spring 循坏依赖
 
 ```
 
-错误信息的大体意思是：
+错误信息大体意思是：不鼓励依赖循环引用，默认情况下是禁止的。可以通过修改代码，删除 bean 之间的依赖循环。或者通过将 spring.main.allow-circular-references 设置为 true 来自动中断循环。
 
-```text
-不鼓励依赖循环引用，默认情况下是禁止的。可以通过修改代码，删除 bean 之间的依赖循环。 或者通过将 spring.main.allow-circular-references 设置为 true 来自动中断循环。
+鉴于自己曾经也遇到过这个问题，因此把曾经整理的云笔记结合源码输出此文，希望帮助到同样遇坑的小伙伴。
+
+
+
+## 什么是循环依赖
+
+循环依赖是指：对象实例之间依赖关系构成一个闭环，通常分为：单个对象的自我依赖、两个对象的相互依赖、多个对象依赖成环。循环依赖抽象如下图：
+
+![img.png](https://yuanjava.cn//assets/md/spring/circular-type.png)
+
+### 单个对象的自我依赖
+
+```java
+@Component
+public class OrderService {
+  @Autowired
+  private OrderService OrderService;
+}
 ```
-对照报错信息查看业务代码，找到了问题点，于是把问题代码抽象成下面的 OrderService 和 UserService 两个类：
+
+产生了这种循环依赖，说明代码真的很low，要自我检讨。
+
+### 两个对象的相互依赖
+从上文 OrderService 和 UserService 两个类的代码可以看出，在初始化 OrderService 类时，需要依赖 UserService，而 UserService 类未实例化，因此需要实例化 UserService 类，但是在初始化 UserService 类时发现它又依赖 OrderService 类，因此就产生了循环依赖，依赖关系可以抽象成下图：
+
+![img.png](https://yuanjava.cn//assets/md/spring/spring-circular.png)
 
 ```java
 @Component
@@ -77,30 +95,61 @@ public class UserService {
 }
 ```
 
-## 什么是循环依赖
+### 多个对象的依赖成环
 
-循环依赖是指：对象实例之间依赖关系构成一个环形，分为：单个对象的自我循环、两个对象的相互循坏、多个对象的相互循坏。抽象图如下：
+```java
+@Component
+public class OrderService {
+    private final UserService userService;
+    public OrderService(UserService userService){
+        this.userService = userService;
+    }
 
-![img.png](https://yuanjava.cn//assets/md/spring/circular-type.png)
+    public User getUser(){
+        return userService.getUser();
+    }
+}
 
+@Component
+public class UserService {
 
-从上文 OrderService 和 UserService 两个类的代码可以看出，在初始化 OrderService 类时，需要依赖 UserService，而 UserService 类未实例化，因此需要实例化 UserService 类，但是在初始化 UserService 类时
-发现它又依赖 OrderService 类，因此就产生了循环依赖，依赖关系可以抽象成下图：
+  private final GoodsService goodsService;
+  public UserService(GoodsService goodsService){
+    this.goodsService = goodsService;
+  }
 
-![img.png](https://yuanjava.cn//assets/md/spring/spring-circular.png)
+  public Goods getGoodsService(){
+    return goodsService.getGoods();
+  }
+}
 
+@Component
+public class GoodsService {
 
+  private final OrderService orderService;
+  public GoodsService(OrderService orderService){
+    this.orderService = orderService;
+  }
+
+  public Order getOrder(){
+    return orderService.getOrder();
+  }
+}
+```
+
+这种循环依赖比较隐蔽，多个对象依赖，最终成环。
 
 ## 如何解决循环依赖
 
-**1. 修改代码**
+### 3.1 修改代码
 
-既然存在循环依赖，那就把出现循环依赖的代码重构一遍，使之不发生循环依赖就 ok 了，这是一种代价稍微大点的方案，因为需要变更代码，对于测试等存在一定的回归成本。
-不过，代码出现循坏依赖在一定意义上(不是绝对哦)预示了 code smell：为什么会存在循坏依赖？代码抽象是否合理？是否违背了 [SOLID 软件设计原则](https://www.yuanjava.cn/tags/solid/)？
+既然循环依赖是代码编写带来的，最彻底的方案是把出现循环依赖的代码重构，但是，重构代码的范围可能不可控，因此，对于测试等存在一定的回归成本，这是一种代价稍微大点的方案。
 
-**2. 使用字段依赖注入**
+不过，代码出现循环依赖，在一定意义上（不是绝对哦）预示了 code smell：为什么会存在循环依赖？代码抽象是否合理？代码设计是否违背了 SOLID 原则？
 
-Spring 利用三层缓存天然解决了字段依赖注入的循环依赖问题，但因为 Spring 不推荐字段依赖注入方式，所以该方案也仅供参考不推荐，改造代码如下：
+### 3.2 使用字段依赖注入
+
+曾经很长一段时间（Spring 3.0 以前的版本），字段依赖是比较主流的一种编程方式，因为这种方式编写方便简洁，而且 Spring 也利用三层缓存解决了循环依赖问题，但后面因 Spring 不推荐字段依赖注入方式，并且在 github上也可以发现大部分的开源软件也不采用这种方式了，所以该方案也仅供参考不推荐，改造代码如下：
 
 ```java
 @Component
@@ -396,10 +445,10 @@ class CglibAopProxy implements AopProxy, Serializable {
 
 ## 总结
 
-- Spring构造器注入循环依赖有3种解决办法：重构代码、字段依赖注入、@Lazy注解。强烈推荐 @Lazy注解
-- @Lazy注解 解决思路是：初始化时注入代理对象，真实调用时使用Spring AOP动态代理去关联真实对象，然后通过反射完成调用
-- @Lazy注解 加在构造器上，作用域为构造器所有参数，加在构造器某个参数上，作用域为该参数
-- @Lazy注解 作用在接口上，使用 JDK动态代理，作用在类上，使用 CGLib动态代理
+- Spring构造器注入循环依赖有3种解决办法：重构代码、字段依赖注入、@Lazy注解。强烈推荐 @Lazy注解；
+- @Lazy注解 解决思路是：初始化时注入代理对象，真实调用时使用Spring AOP动态代理去关联真实对象，然后通过反射完成调用；
+- @Lazy注解 加在构造器上，作用域为构造器所有参数，加在构造器某个参数上，作用域为该参数；
+- @Lazy注解 作用在接口上，使用 JDK动态代理，作用在类上，使用 CGLib动态代理；
 
 
 ## 鸣谢
