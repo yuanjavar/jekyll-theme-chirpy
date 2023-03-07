@@ -54,11 +54,71 @@ Spring 循环依赖一般包含 构造器注入循环依赖 和字段注入（se
 ### 单个对象的自我依赖
 
 ```java
+// 变量依赖注入循环依赖，服务器启动会报错
+@Component
+public class UserService {
+  @Autowired
+  private UserService userService;
+}
+```
+
+运行结果
+```java
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌──->──┐
+|  userService2 (field cn.yuanjava.service.UserService2 cn.yuanjava.service.UserService2.userService2)
+└──<-──┘
+
+```
+
+```java
+// 字段依赖注入循环依赖
 @Component
 public class OrderService {
   @Autowired
-  private OrderService OrderService;
+  private OrderService orderService;
 }
+
+// 构造器注入循环依赖
+@Component
+public class OrderService {
+
+  private final OrderService orderService;
+
+  public OrderService(){
+    this.OrderService = orderService;
+  }
+}
+```
+
+
+```java
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ ERROR 3846 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   :
+
+  ***************************
+  APPLICATION FAILED TO START
+  ***************************
+
+  Description:
+  The dependencies of some of the beans in the application context form a cycle:
+
+  ┌─────┐
+  |  orderService (field private cn.yuanjava.service.UserService cn.yuanjava.service.OrderService.userService)
+  ↑     ↓
+  |  userService (field private cn.yuanjava.service.OrderService cn.yuanjava.service.UserService.orderService)
+  └─────┘
+
+  Action:
+  Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
 ```
 
 产生了这种循环依赖，说明代码真的很low，要自我检讨。
@@ -69,16 +129,27 @@ public class OrderService {
 ![img.png](https://yuanjava.cn//assets/md/spring/spring-circular.png)
 
 ```java
+// 字段依赖注入循环依赖，服务器能正常run
 @Component
 public class OrderService {
-    private final UserService userService;
-    public OrderService(UserService userService){
-        this.userService = userService;
-    }
+  @Autowired
+  private UserService userService;
+}
 
-    public User getUser(){
-        return userService.getUser();
-    }
+@Component
+public class UserService {
+  @Autowired
+  private OrderService orderService;
+}
+
+
+// 构造器注入循环依赖，服务器启动会报错
+@Component
+public class OrderService {
+  private final UserService userService;
+  public OrderService(UserService userService){
+    this.userService = userService;
+  }
 }
 
 @Component
@@ -88,26 +159,38 @@ public class UserService {
   public UserService(OrderService orderService){
     this.orderService = orderService;
   }
-
-  public Order getOrder(){
-    return orderService.getOrder();
-  }
 }
 ```
 
 ### 多个对象的依赖成环
 
 ```java
+// 变量依赖注入循环依赖，服务器启动会报错
+@Component
+public class UserService {
+  @Autowired
+  private OrderService orderService;
+}
+
 @Component
 public class OrderService {
-    private final UserService userService;
-    public OrderService(UserService userService){
-        this.userService = userService;
-    }
+  @Autowired
+  private GoodsService goodsService;
+}
 
-    public User getUser(){
-        return userService.getUser();
-    }
+@Component
+public class GoodsService {
+  @Autowired
+  private UserService userService;
+}
+
+// 构造器注入循环依赖，服务器启动会报错
+@Component
+public class OrderService {
+  private final UserService userService;
+  public OrderService(UserService userService){
+    this.userService = userService;
+  }
 }
 
 @Component
@@ -116,10 +199,6 @@ public class UserService {
   private final GoodsService goodsService;
   public UserService(GoodsService goodsService){
     this.goodsService = goodsService;
-  }
-
-  public Goods getGoodsService(){
-    return goodsService.getGoods();
   }
 }
 
@@ -130,14 +209,85 @@ public class GoodsService {
   public GoodsService(OrderService orderService){
     this.orderService = orderService;
   }
-
-  public Order getOrder(){
-    return orderService.getOrder();
-  }
 }
 ```
-
 这种循环依赖比较隐蔽，多个对象依赖，最终成环。
+
+```java
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ERROR 33185 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   :
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  goodsService (field private cn.yuanjava.service.UserService cn.yuanjava.service.GoodsService.userService)
+↑     ↓
+|  userService (field private cn.yuanjava.service.OrderService cn.yuanjava.service.UserService.orderService)
+↑     ↓
+|  orderService (field private cn.yuanjava.service.GoodsService cn.yuanjava.service.OrderService.goodsService)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+
+```
+
+
+
+```java
+
+@Service
+public class UserService {
+    private OrderService orderService;
+    public UserService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+}
+
+@Service
+public class OrderService {
+    private UserService userService;
+
+    public OrderService(UserService userService) {
+        this.userService = userService;
+    }
+}
+
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-02-19 14:36:13.133 ERROR 15885 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   :
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  orderService defined in file [/Users/weiki/Desktop/workspace/yuan/yuanjava/build/classes/java/main/cn/yuanjava/service/OrderService.class]
+↑     ↓
+|  userService defined in file [/Users/weiki/Desktop/workspace/yuan/yuanjava/build/classes/java/main/cn/yuanjava/service/UserService.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+
+
+```
 
 ## 如何解决循环依赖
 
