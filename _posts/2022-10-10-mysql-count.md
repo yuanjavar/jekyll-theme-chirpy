@@ -123,7 +123,7 @@ InnoDB引擎采用的是聚簇索引机制，主键索引的叶子节点存放�
 
 count(主键)的执行逻辑为：InnoDB引擎会遍历整张表，然后取出每一行的主键值并返回给 MySQL Server层，Server层拿到引擎的结果值后，统计主键总数量。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-countz.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-countz.png)
 
 ![img.png](../assets/md/mysql/mysql-countz.png)
 
@@ -134,7 +134,7 @@ count(1)的执行逻辑为：InnoDB引擎遍历整张表，但是不会取数据
 
 所以，count(1)操作要比 count(主键)快。因为count(主键)需要从引擎返回主键值，过程中会涉及到数据行的解析，字段值的拷贝等I/O操作。
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-count1.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-count1.png)
 
 ## count(非主键字段)
 
@@ -164,13 +164,13 @@ name=NULL的数据，各种count(expr)的结果为：
 
 **这是因为：count(非主键) 只统计非主键字段值不为NULL的总数。**
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-countfzi.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-countfzi.png)
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql-countfz.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql-countfz.png)
 
 ## 源码分析
 
-![img.png](http://127.0.0.1:4000/assets/md/mysql/mysql_add.png)
+![img.png](https://yuanjava.cn/assets/md/mysql/mysql_add.png)
 
 
 ## 总结
